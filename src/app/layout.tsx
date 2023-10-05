@@ -22,9 +22,13 @@ export default function RootLayout({
       <head />
       <body className={inter.className}>
         <AppProviders>
-          <NavBar className="mx-12 my-3" />
+          <div className="flex w-full  justify-center">
+            <div className="w-full px-4 py-3 lg:mx-12 lg:max-w-6xl">
+              <NavBar />
 
-          {children}
+              {children}
+            </div>
+          </div>
         </AppProviders>
       </body>
     </html>

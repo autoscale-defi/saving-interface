@@ -5,12 +5,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/theme-toggle.component';
 import { Button } from '@/components/ui/button';
-import {
-  useAccount,
-  useIsLoggedIn,
-  useLogout,
-  useWebWallet,
-} from '@/lib/dapp-core';
+import { useAccount, useLogout, useWebWallet } from '@/lib/dapp-core';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export function NavBar({
@@ -23,31 +18,19 @@ export function NavBar({
 
   return (
     <nav
-      className={cn('flex items-center justify-between', className)}
+      className={cn('flex w-full items-center justify-between', className)}
       {...props}
     >
-      <div className="space-x-4 lg:space-x-6">
+      <div className="flex space-x-4 lg:space-x-6">
         <Link
-          href="/examples/dashboard"
-          className="text-md font-medium transition-colors hover:text-primary"
+          href="/"
+          className="text-lg font-medium transition-colors hover:text-primary"
         >
           Saving
         </Link>
-        <Link
-          href="/examples/dashboard"
-          className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-        >
-          Home
-        </Link>
-        <Link
-          href="/examples/dashboard"
-          className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-        >
-          About
-        </Link>
       </div>
 
-      <div className="flex items-center space-x-4 lg:space-x-8">
+      <div className="flex items-center space-x-2 lg:space-x-4">
         {account ? (
           <div
             onClick={logout}
