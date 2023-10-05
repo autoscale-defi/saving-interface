@@ -1,15 +1,17 @@
-import { useEffect } from "react";
+'use client';
 
-import { useAuthContext } from "../../../providers/Authentification.providers";
-import * as accountsService from "../../../services/accounts.services";
-import { useDappCoreContext } from "../../../providers/DappCore.providers";
-import { LoginMethodsEnum } from "../../../types/login.types";
+import { useEffect } from 'react';
 
-import { useAddressScreens } from "./useAddressScreens.hooks";
-import { ledgerErrorCodes } from "./ledger.constants";
+import { useAuthContext } from '../../../providers/Authentification.providers';
+import * as accountsService from '../../../services/accounts.services';
+import { useDappCoreContext } from '../../../providers/DappCore.providers';
+import { LoginMethodsEnum } from '../../../types/login.types';
 
-const failInitializeErrorText = "Check if the MultiversX App is open on Ledger";
-const ledgerAppErrorText = "Check if the MultiversX app is open on Ledger";
+import { useAddressScreens } from './useAddressScreens.hooks';
+import { ledgerErrorCodes } from './ledger.constants';
+
+const failInitializeErrorText = 'Check if the MultiversX App is open on Ledger';
+const ledgerAppErrorText = 'Check if the MultiversX app is open on Ledger';
 const notConnectedCode = 0x6e01;
 const wrongClaCode = 0x6e00;
 const inactiveAppCodes = [notConnectedCode, wrongClaCode];
@@ -94,7 +96,7 @@ export function useLedger() {
   }
 
   async function onConfirmSelectedAddress() {
-    setError("");
+    setError('');
 
     try {
       setIsLoading(true);
@@ -137,7 +139,7 @@ export function useLedger() {
     } catch (err) {
       const { errorMessage, defaultErrorMessage } = getLedgerErrorCodes(err);
       setError(errorMessage ?? defaultErrorMessage);
-      console.error("error", err);
+      console.error('error', err);
       setIsLoading(false);
     }
   }

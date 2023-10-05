@@ -1,14 +1,16 @@
-import { useState } from "react";
+'use client';
 
-import { useAuthContext } from "../../providers/Authentification.providers";
-import * as accountsService from "../../services/accounts.services";
-import { useDappCoreContext } from "../../providers/DappCore.providers";
-import { LoginMethodsEnum } from "../../types/login.types";
+import { useState } from 'react';
+
+import { useAuthContext } from '../../providers/Authentification.providers';
+import * as accountsService from '../../services/accounts.services';
+import { useDappCoreContext } from '../../providers/DappCore.providers';
+import { LoginMethodsEnum } from '../../types/login.types';
 
 export const useExtensionLogin = () => {
   const authContext = useAuthContext();
   const dappCoreContext = useDappCoreContext();
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   async function initiateLogin() {
     const provider = authContext!.providers.extension;
@@ -30,8 +32,8 @@ export const useExtensionLogin = () => {
         loginMethod: LoginMethodsEnum.extension,
       });
     } catch (error) {
-      console.error("error loging in", error);
-      setError("error logging in" + (error as any).message);
+      console.error('error loging in', error);
+      setError('error logging in' + (error as any).message);
     }
   }
 

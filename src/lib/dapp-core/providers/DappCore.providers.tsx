@@ -1,9 +1,10 @@
-import * as React from "react";
+'use client';
+import * as React from 'react';
 
-import { Network } from "../types/network.types";
+import { Network } from '../types/network.types';
 
-import { AuthentificationProvider } from "./Authentification.providers";
-import { TransactionsProviders } from "./Transactions.providers";
+import { AuthentificationProvider } from './Authentification.providers';
+import { TransactionsProviders } from './Transactions.providers';
 
 const DappCoreContext = React.createContext<{ networkConfig: Network } | null>(
   null

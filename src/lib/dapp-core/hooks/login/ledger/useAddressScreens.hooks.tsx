@@ -1,4 +1,6 @@
-import { useState } from "react";
+'use client';
+
+import { useState } from 'react';
 
 const defaultAddressesPerPage = 10;
 
@@ -8,7 +10,7 @@ export interface SelectedAddress {
 }
 
 export const useAddressScreens = () => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const [startIndex, setStartIndex] = useState(0);

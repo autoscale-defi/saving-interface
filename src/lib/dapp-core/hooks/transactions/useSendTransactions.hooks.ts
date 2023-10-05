@@ -1,15 +1,17 @@
-import * as React from "react";
-import { Transaction } from "@multiversx/sdk-core";
-import { WalletProvider } from "@multiversx/sdk-web-wallet-provider/out";
+'use client';
 
-import { useAuthContext } from "../../providers/Authentification.providers";
-import { useDappCoreContext } from "../../providers/DappCore.providers";
-import { sendSignedTransaction } from "../../services/transactions.services";
+import * as React from 'react';
+import { Transaction } from '@multiversx/sdk-core';
+import { WalletProvider } from '@multiversx/sdk-web-wallet-provider/out';
+
+import { useAuthContext } from '../../providers/Authentification.providers';
+import { useDappCoreContext } from '../../providers/DappCore.providers';
+import { sendSignedTransaction } from '../../services/transactions.services';
 import {
   Status,
   useTransactionsContext,
-} from "../../providers/Transactions.providers";
-import * as accountsService from "../../services/accounts.services";
+} from '../../providers/Transactions.providers';
+import * as accountsService from '../../services/accounts.services';
 
 export function useSendTransactions() {
   const authContext = useAuthContext();
@@ -34,18 +36,18 @@ export function useSendTransactions() {
         onSign(): void;
       }) => {
         if (!authContext!.loginMethod) {
-          throw new Error("No login method");
+          throw new Error('No login method');
         }
 
         const provider = authContext!.providers[authContext!.loginMethod];
 
-        if ("init" in provider) {
+        if ('init' in provider) {
           await provider.init();
         }
 
         if (provider instanceof WalletProvider) {
           sessionStorage.setItem(
-            "@autoscale/pendingTransactionsContext",
+            '@autoscale/pendingTransactionsContext',
             JSON.stringify({
               sessionInformations,
               sessionId,
@@ -55,7 +57,7 @@ export function useSendTransactions() {
 
         const account = await accountsService.getAccount(
           dappCoreContext!.networkConfig.apiAddress,
-          authContext?.account?.address || ""
+          authContext?.account?.address || ''
         );
 
         transaction.setNonce(account.nonce);
@@ -81,8 +83,8 @@ export function useSendTransactions() {
             return onSign();
           }
 
-          console.error("Transaction not signed");
-          onError(new Error("Transaction not signed"));
+          console.error('Transaction not signed');
+          onError(new Error('Transaction not signed'));
         } catch (error) {
           console.error(error);
           onError(error);
@@ -115,25 +117,25 @@ export function useSendTransactions() {
         onSign(): void;
       }) => {
         if (!authContext!.loginMethod) {
-          throw new Error("No login method");
+          throw new Error('No login method');
         }
 
         const provider = authContext!.providers[authContext!.loginMethod];
 
-        if ("init" in provider) {
+        if ('init' in provider) {
           await provider.init();
         }
 
         if (provider instanceof WalletProvider) {
           sessionStorage.setItem(
-            "@autoscale/pendingTransactionsContext",
+            '@autoscale/pendingTransactionsContext',
             JSON.stringify({ sessionInformations, sessionId })
           );
         }
 
         const account = await accountsService.getAccount(
           dappCoreContext!.networkConfig.apiAddress,
-          authContext?.account?.address || ""
+          authContext?.account?.address || ''
         );
 
         transactions.forEach((transaction, index) => {
@@ -143,9 +145,8 @@ export function useSendTransactions() {
 
         try {
           // @ts-ignore
-          const signedTransactions = await provider.signTransactions(
-            transactions
-          );
+          const signedTransactions =
+            await provider.signTransactions(transactions);
 
           if (signedTransactions) {
             await Promise.all([

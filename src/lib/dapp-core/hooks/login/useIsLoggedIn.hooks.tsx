@@ -1,4 +1,6 @@
-import { useAuthContext } from "../../providers/Authentification.providers";
+'use client';
+
+import { useAuthContext } from '../../providers/Authentification.providers';
 
 export const useIsLoggedIn = () => {
   const authContext = useAuthContext();

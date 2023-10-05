@@ -1,37 +1,38 @@
-import * as React from "react";
+'use client';
 
-import { useDappCoreContext } from "../../providers/DappCore.providers";
-import { useAuthContext } from "../../providers/Authentification.providers";
+import * as React from 'react';
+
+import { useDappCoreContext } from '../../providers/DappCore.providers';
+import { useAuthContext } from '../../providers/Authentification.providers';
 
 export enum WalletConnectV2Error {
-  invalidAddress = "Invalid address",
-  invalidConfig = "Invalid WalletConnect setup",
-  invalidTopic = "Expired connection",
-  sessionExpired = "Unable to connect to existing session",
-  connectError = "Unable to connect",
-  userRejected = "User rejected connection proposal",
-  userRejectedExisting = "User rejected existing connection proposal",
-  errorLogout = "Unable to remove existing pairing",
+  invalidAddress = 'Invalid address',
+  invalidConfig = 'Invalid WalletConnect setup',
+  invalidTopic = 'Expired connection',
+  sessionExpired = 'Unable to connect to existing session',
+  connectError = 'Unable to connect',
+  userRejected = 'User rejected connection proposal',
+  userRejectedExisting = 'User rejected existing connection proposal',
+  errorLogout = 'Unable to remove existing pairing',
 }
 
 export enum DappCoreWCV2CustomMethodsEnum {
-  mvx_cancelAction = "mvx_cancelAction",
+  mvx_cancelAction = 'mvx_cancelAction',
 }
 
 export const useWalletConnect = () => {
   const dappCoreContext = useDappCoreContext();
   const authContext = useAuthContext();
 
-  const [error, setError] = React.useState<string>("");
-  const [wcUri, setWcUri] = React.useState<string>("");
+  const [error, setError] = React.useState<string>('');
+  const [wcUri, setWcUri] = React.useState<string>('');
 
   const dappMethods: string[] = [
     DappCoreWCV2CustomMethodsEnum.mvx_cancelAction,
   ];
 
-  const uriDeepLink = `${
-    dappCoreContext!.networkConfig?.walletConnectDeepLink
-  }?wallet-connect=${encodeURIComponent(wcUri)}`;
+  const uriDeepLink = `${dappCoreContext!.networkConfig
+    ?.walletConnectDeepLink}?wallet-connect=${encodeURIComponent(wcUri)}`;
 
   async function initiateLogin() {
     await generateWcUri();

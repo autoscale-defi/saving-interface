@@ -29,11 +29,13 @@
     "qs": "^6.11.1",
     "react": "^18.2.0",
     "react-dom": "latest",
+    "recharts": "^2.8.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "use-local-storage-state": "18.3.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.199",
     "@types/node": "latest",
     "@types/qs": "^6.9.7",
     "@types/react": "latest",

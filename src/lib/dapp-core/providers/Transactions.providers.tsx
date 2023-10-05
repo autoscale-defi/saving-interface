@@ -1,18 +1,20 @@
-import * as React from "react";
-import keyBy from "lodash/keyBy";
-import filter from "lodash/filter";
-import useLocalStorageState from "use-local-storage-state";
+'use client';
 
-import { useInterval } from "../hooks/global/useInterval.hooks";
-import { getTransactionsStatusByHashes } from "../services/transactions.services";
+import * as React from 'react';
+import keyBy from 'lodash/keyBy';
+import filter from 'lodash/filter';
+import useLocalStorageState from 'use-local-storage-state';
 
-import { useDappCoreContext } from "./DappCore.providers";
+import { useInterval } from '../hooks/global/useInterval.hooks';
+import { getTransactionsStatusByHashes } from '../services/transactions.services';
+
+import { useDappCoreContext } from './DappCore.providers';
 
 export enum Status {
-  FAILED = "fail",
-  SUCCESS = "success",
-  SENT = "pending",
-  CANCELLED = "cancelled",
+  FAILED = 'fail',
+  SUCCESS = 'success',
+  SENT = 'pending',
+  CANCELLED = 'cancelled',
 }
 
 export type DappTransaction = {
@@ -39,7 +41,7 @@ export const TransactionsProviders = ({
   const dappCoreContext = useDappCoreContext();
   const [dappTransactions, setDappTransactions] = useLocalStorageState<
     Record<string, DappTransaction>
-  >("@autoscale/dappTransactions", {
+  >('@autoscale/dappTransactions', {
     defaultValue: {},
   });
 
@@ -57,7 +59,7 @@ export const TransactionsProviders = ({
     (dappTransactions: DappTransaction[]) => {
       setDappTransactions((transactions) => ({
         ...transactions,
-        ...keyBy(dappTransactions, "txHash"),
+        ...keyBy(dappTransactions, 'txHash'),
       }));
     },
     []
@@ -70,7 +72,7 @@ export const TransactionsProviders = ({
   useInterval(async () => {
     const pendingTransactions = filter(
       dappTransactions,
-      (transaction) => transaction.status === "pending"
+      (transaction) => transaction.status === 'pending'
     );
 
     if (!pendingTransactions.length) return;
@@ -84,7 +86,7 @@ export const TransactionsProviders = ({
 
     setDappTransactions((transactions) => ({
       ...transactions,
-      ...keyBy(pendingTransactionsWithNewStatus, "txHash"),
+      ...keyBy(pendingTransactionsWithNewStatus, 'txHash'),
     }));
   }, 3000);
 

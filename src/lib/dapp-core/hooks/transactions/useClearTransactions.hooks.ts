@@ -1,4 +1,6 @@
-import { useTransactionsContext } from "../../providers/Transactions.providers";
+'use client';
+
+import { useTransactionsContext } from '../../providers/Transactions.providers';
 export const useClearTransactions = () => {
   const transactionContext = useTransactionsContext();
 

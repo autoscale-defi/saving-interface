@@ -1,19 +1,21 @@
-import * as React from "react";
-import useLocalStorageState from "use-local-storage-state";
-import { WalletProvider } from "@multiversx/sdk-web-wallet-provider";
-import { WalletConnectV2Provider } from "@multiversx/sdk-wallet-connect-provider";
-import { ExtensionProvider } from "@multiversx/sdk-extension-provider";
-import { HWProvider } from "@multiversx/sdk-hw-provider/out";
+'use client';
 
-import * as accountsService from "../services/accounts.services";
-import { LoginMethodsEnum } from "../types/login.types";
-import { Account } from "../types/accounts.types";
-import { clearNavigationHistory } from "../utils/clearNavigationHistory.utils";
-import { Network } from "../types/network.types";
-import { useParseSignedTransactions } from "../hooks/transactions/useParsedSignTransactions.hooks";
+import * as React from 'react';
+import useLocalStorageState from 'use-local-storage-state';
+import { WalletProvider } from '@multiversx/sdk-web-wallet-provider';
+import { WalletConnectV2Provider } from '@multiversx/sdk-wallet-connect-provider';
+import { ExtensionProvider } from '@multiversx/sdk-extension-provider';
+import { HWProvider } from '@multiversx/sdk-hw-provider/out';
 
-import { useDappCoreContext } from "./DappCore.providers";
-import { useTransactionsContext } from "./Transactions.providers";
+import * as accountsService from '../services/accounts.services';
+import { LoginMethodsEnum } from '../types/login.types';
+import { Account } from '../types/accounts.types';
+import { clearNavigationHistory } from '../utils/clearNavigationHistory.utils';
+import { Network } from '../types/network.types';
+import { useParseSignedTransactions } from '../hooks/transactions/useParsedSignTransactions.hooks';
+
+import { useDappCoreContext } from './DappCore.providers';
+import { useTransactionsContext } from './Transactions.providers';
 
 export function getWebWalletProvider({ network }: { network: Network }) {
   return new WalletProvider(`${network.walletAddress}/dapp/init`);
@@ -105,7 +107,7 @@ export const AuthentificationProvider = ({
     account?: Account;
     loginMethod?: LoginMethodsEnum;
     at?: number;
-  }>("@autoscale/auth", { defaultValue: {} });
+  }>('@autoscale/auth', { defaultValue: {} });
 
   React.useEffect(() => {
     if (auth.loginMethod === LoginMethodsEnum.wallet || !auth.loginMethod) {
@@ -127,11 +129,11 @@ export const AuthentificationProvider = ({
         return;
       }
 
-      if ("setAddress" in provider) {
+      if ('setAddress' in provider) {
         await provider.setAddress(auth?.account?.address!);
       }
 
-      if ("init" in provider) {
+      if ('init' in provider) {
         await provider.init();
       }
 
@@ -147,7 +149,7 @@ export const AuthentificationProvider = ({
   }
 
   async function tryAuthenticateWalletUser() {
-    const address = new URLSearchParams(window.location.search).get("address");
+    const address = new URLSearchParams(window.location.search).get('address');
 
     if (!address) return;
 

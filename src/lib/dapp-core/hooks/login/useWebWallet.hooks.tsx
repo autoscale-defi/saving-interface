@@ -1,7 +1,9 @@
-import * as React from "react";
+'use client';
 
-import { useAuthContext } from "../../providers/Authentification.providers";
-import { LoginMethodsEnum } from "../../types/login.types";
+import * as React from 'react';
+
+import { useAuthContext } from '../../providers/Authentification.providers';
+import { LoginMethodsEnum } from '../../types/login.types';
 
 export type Props = {
   redirectDelayMilliseconds?: number;

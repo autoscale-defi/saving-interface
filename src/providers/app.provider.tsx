@@ -1,5 +1,4 @@
 'use client';
-
 import { DappCoreProvider } from '@/lib/dapp-core';
 import { ThemeProvider } from '@/providers/theme.provider';
 

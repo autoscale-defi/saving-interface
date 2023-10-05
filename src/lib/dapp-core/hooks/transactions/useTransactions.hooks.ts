@@ -1,6 +1,8 @@
-import values from "lodash/values";
+'use client';
 
-import { useTransactionsContext } from "../../providers/Transactions.providers";
+import values from 'lodash/values';
+
+import { useTransactionsContext } from '../../providers/Transactions.providers';
 export const useTransactions = () => {
   const transactionContext = useTransactionsContext();
 
