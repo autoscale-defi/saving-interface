@@ -7,6 +7,17 @@ import { ThemeToggle } from '@/components/theme-toggle.component';
 import { Button } from '@/components/ui/button';
 import { useAccount, useLogout, useWebWallet } from '@/lib/dapp-core';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { UserConnectedInformations } from '@/app/_components/user-connected-informations.component';
 
 export function NavBar({
   className,
@@ -14,7 +25,6 @@ export function NavBar({
 }: React.HTMLAttributes<HTMLElement>) {
   const account = useAccount();
   const { login } = useWebWallet();
-  const logout = useLogout();
 
   return (
     <nav
@@ -32,25 +42,7 @@ export function NavBar({
 
       <div className="flex items-center space-x-2 lg:space-x-4">
         {account ? (
-          <div
-            onClick={logout}
-            className="flex cursor-pointer flex-row items-center space-x-2 hover:text-destructive"
-          >
-            <Avatar>
-              <AvatarImage
-                src={`https://id.maiar.com/users/photos/profile/${account?.address}`}
-              />
-              <AvatarFallback>
-                {account.address.slice(0, 2).toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-            <div>
-              {`${account.address.substring(
-                0,
-                5
-              )}...${account.address.substring(account.address.length - 5)}`}
-            </div>
-          </div>
+          <UserConnectedInformations account={account} />
         ) : (
           <Button onClick={login}>Connect Wallet</Button>
         )}

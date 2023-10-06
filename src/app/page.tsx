@@ -17,15 +17,15 @@ export default function Home() {
           <TabsList>
             <TabsTrigger
               value="analytics"
-              className="data-[state=active]:font-bold"
+              className="data-[state=active]:font-extrabold"
             >
-              Analytics
+              <span className="hover:text-foreground/90">Analytics</span>
             </TabsTrigger>
             <TabsTrigger
               value="money"
-              className="data-[state=active]:font-bold"
+              className="data-[state=active]:font-extrabold"
             >
-              My Money
+              <span className="hover:text-foreground/90">My Money</span>
             </TabsTrigger>
             <TabsTrigger value="simulator" disabled>
               Simulator (coming soon)
