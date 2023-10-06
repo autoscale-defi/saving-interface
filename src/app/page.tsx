@@ -3,6 +3,7 @@
 import { Tabs, TabsContent, TabsTrigger } from '@/components/ui/tabs';
 import { TabsList } from '@radix-ui/react-tabs';
 import { AnalyticsTab } from '@/app/_components/analytics-tab.component';
+import { MyMoneyTab } from '@/app/_components/my-money-tab.component';
 
 export default function Home() {
   return (
@@ -32,7 +33,7 @@ export default function Home() {
           </TabsList>
 
           <TabsContent value="money" className="space-y-4">
-            My Money
+            <MyMoneyTab />
           </TabsContent>
 
           <TabsContent value="analytics" className="space-y-4">
