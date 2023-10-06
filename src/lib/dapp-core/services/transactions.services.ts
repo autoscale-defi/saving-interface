@@ -1,7 +1,7 @@
-import axios from "axios";
-import { IPlainTransactionObject } from "@multiversx/sdk-core";
+import axios from 'axios';
+import { IPlainTransactionObject } from '@multiversx/sdk-core';
 
-import { DappTransaction } from "../providers/Transactions.providers";
+import { DappTransaction } from '../providers/Transactions.providers';
 
 export async function sendSignedTransaction(
   apiAddress: string,
@@ -18,7 +18,7 @@ export async function getTransactionsStatusByHashes(
 ): Promise<(DappTransaction & { hasStatusChanged: boolean })[]> {
   const { data: responseData } = await axios.get(`${apiAddress}/transactions`, {
     params: {
-      hashes: pendingTransactions.map((tx) => tx.txHash).join(","),
+      hashes: pendingTransactions.map((tx) => tx.txHash).join(','),
       withScResults: true,
     },
   });
@@ -27,7 +27,7 @@ export async function getTransactionsStatusByHashes(
     const txOnNetwork =
       responseData.find(
         (txResponse: any) => txResponse?.txHash === pendingTransaction.txHash
-      ) || "pending";
+      ) || 'pending';
 
     return {
       ...pendingTransaction,

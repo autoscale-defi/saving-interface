@@ -15,18 +15,8 @@ export default function Home() {
 
         <Tabs defaultValue="analytics" className="space-y-4">
           <TabsList>
-            <TabsTrigger
-              value="analytics"
-              className="data-[state=active]:font-extrabold"
-            >
-              <span className="hover:text-foreground/90">Analytics</span>
-            </TabsTrigger>
-            <TabsTrigger
-              value="money"
-              className="data-[state=active]:font-extrabold"
-            >
-              <span className="hover:text-foreground/90">My Money</span>
-            </TabsTrigger>
+            <TabsTrigger value="analytics">Analytics</TabsTrigger>
+            <TabsTrigger value="money">My Money</TabsTrigger>
             <TabsTrigger value="simulator" disabled>
               Simulator (coming soon)
             </TabsTrigger>
