@@ -5,19 +5,9 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/theme-toggle.component';
 import { Button } from '@/components/ui/button';
-import { useAccount, useLogout, useWebWallet } from '@/lib/dapp-core';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+import { useAccount, useWebWallet } from '@/lib/dapp-core';
 import { UserConnectedInformations } from '@/app/_components/user-connected-informations.component';
+import { TransactionsInformations } from '@/app/_components/transactions-informations.component';
 
 export function NavBar({
   className,
@@ -36,13 +26,16 @@ export function NavBar({
           href="/"
           className="text-lg font-medium transition-colors hover:text-primary"
         >
-          Saving
+          Savings
         </Link>
       </div>
 
-      <div className="flex items-center space-x-2 lg:space-x-4">
+      <div className="flex items-center space-x-2">
         {account ? (
-          <UserConnectedInformations account={account} />
+          <>
+            <UserConnectedInformations account={account} />
+            <TransactionsInformations />
+          </>
         ) : (
           <Button onClick={login}>Connect Wallet</Button>
         )}
