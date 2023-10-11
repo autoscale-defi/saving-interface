@@ -26,7 +26,7 @@ export default function RootLayout({
             <div className="w-full px-4 py-3 lg:mx-12 lg:max-w-6xl">
               <NavBar />
 
-              {children}
+              <div className={'py-6'}>{children}</div>
             </div>
           </div>
         </AppProviders>

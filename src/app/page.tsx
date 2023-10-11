@@ -1,36 +1,62 @@
 'use client';
 
-import { Tabs, TabsContent, TabsTrigger } from '@/components/ui/tabs';
-import { TabsList } from '@radix-ui/react-tabs';
-import { AnalyticsTab } from '@/app/_components/analytics-tab.component';
-import { MyMoneyTab } from '@/app/_components/my-money-tab.component';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { RevenueChart } from '@/app/_components/revenue-chart.component';
+import { RevenueCompareChart } from '@/app/_components/revenue-compare-chart.component';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen w-full flex-col">
-      <div className="mt-6 flex-1 space-y-4">
-        <div className="flex items-center justify-between space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-        </div>
-
-        <Tabs defaultValue="analytics" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="analytics">Analytics</TabsTrigger>
-            <TabsTrigger value="money">My Money</TabsTrigger>
-            <TabsTrigger value="simulator" disabled>
-              Simulator (coming soon)
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="money" className="space-y-4">
-            <MyMoneyTab />
-          </TabsContent>
-
-          <TabsContent value="analytics" className="space-y-4">
-            <AnalyticsTab />
-          </TabsContent>
-        </Tabs>
+    <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Fixed APY</CardTitle>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              className="h-4 w-4 text-muted-foreground"
+            >
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+            </svg>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">6%</div>
+            <p className="text-xs text-muted-foreground">+1.5% vs market</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total deposit</CardTitle>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              className="h-4 w-4 text-muted-foreground"
+            >
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+            </svg>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">3,456,000 $</div>
+            <p className="text-xs text-muted-foreground">+200,000$ today</p>
+          </CardContent>
+        </Card>
+        <RevenueChart />
       </div>
-    </main>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="col-span-2">
+          <RevenueCompareChart />
+        </div>
+      </div>
+    </div>
   );
 }

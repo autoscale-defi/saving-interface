@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-export function MyMoneyTab() {
+export default function MyMoney() {
   return (
     <div className="flex w-full flex-col gap-6 md:flex-row">
       <div className="space-y-4">

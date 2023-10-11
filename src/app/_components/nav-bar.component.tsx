@@ -8,25 +8,42 @@ import { Button } from '@/components/ui/button';
 import { useAccount, useWebWallet } from '@/lib/dapp-core';
 import { UserConnectedInformations } from '@/app/_components/user-connected-informations.component';
 import { TransactionsInformations } from '@/app/_components/transactions-informations.component';
-
+import { usePathname } from 'next/navigation';
+import { DollarSign } from 'lucide-react';
 export function NavBar({
   className,
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
   const account = useAccount();
   const { login } = useWebWallet();
+  const path = usePathname();
 
   return (
     <nav
       className={cn('flex w-full items-center justify-between', className)}
       {...props}
     >
-      <div className="flex space-x-4 lg:space-x-6">
+      <div className="flex items-center justify-center space-x-2 lg:space-x-4">
+        <div className="rounded-xl bg-primary/30 p-1">
+          <DollarSign className="h-5 w-5"></DollarSign>
+        </div>
+
         <Link
           href="/"
-          className="text-lg font-medium transition-colors hover:text-primary"
+          className={`text-md font-semibold hover:font-bold ${
+            path === '/' && 'font-bold'
+          }`}
         >
-          Savings
+          Analytics
+        </Link>
+
+        <Link
+          href="/money"
+          className={`text-md font-semibold hover:font-bold ${
+            path === '/money' && 'font-bold'
+          }`}
+        >
+          Money
         </Link>
       </div>
 
