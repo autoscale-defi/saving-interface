@@ -30,8 +30,8 @@ export function NavBar({
 
         <Link
           href="/"
-          className={`text-md font-semibold hover:font-bold ${
-            path === '/' && 'font-bold'
+          className={`text-md hover:font-semibold ${
+            path === '/' && 'font-semibold'
           }`}
         >
           Analytics
@@ -39,8 +39,8 @@ export function NavBar({
 
         <Link
           href="/money"
-          className={`text-md font-semibold hover:font-bold ${
-            path === '/money' && 'font-bold'
+          className={`text-md hover:font-semibold ${
+            path === '/money' && 'font-semibold'
           }`}
         >
           Money
