@@ -1,7 +1,13 @@
+'use client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useGetUSDCBalance } from '@/lib/dapp-core/hooks/accounts/useGetUSDCBalance.hooks';
+import { formatUSDAmount } from '@/lib/amount';
+import { Placeholder } from '@/components/ui/placeholder';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const USDCBalance = useGetUSDCBalance();
+
   return (
     <div className="flex flex-col-reverse gap-4 md:flex-row">
       <div>{children}</div>
@@ -21,7 +27,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </CardHeader>
 
           <CardContent>
-            <div className="text-md font-bold">1,345 $</div>
+            <div className="text-md font-bold">
+              {USDCBalance ? formatUSDAmount(USDCBalance) : <Placeholder />}
+            </div>
           </CardContent>
         </Card>
       </div>
