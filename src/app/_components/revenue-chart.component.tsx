@@ -5,36 +5,28 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const data = [
   {
-    revenue: 10400,
-    subscription: 240,
+    treasury: 10400,
   },
   {
-    revenue: 14405,
-    subscription: 300,
+    treasury: 14405,
   },
   {
-    revenue: 9400,
-    subscription: 200,
+    treasury: 9400,
   },
   {
-    revenue: 8200,
-    subscription: 278,
+    treasury: 8200,
   },
   {
-    revenue: 7000,
-    subscription: 189,
+    treasury: 7000,
   },
   {
-    revenue: 9600,
-    subscription: 239,
+    treasury: 9600,
   },
   {
-    revenue: 11244,
-    subscription: 278,
+    treasury: 11244,
   },
   {
-    revenue: 26475,
-    subscription: 189,
+    treasury: 26475,
   },
 ];
 
@@ -42,7 +34,7 @@ export function RevenueChart() {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-base font-normal">Total Revenue</CardTitle>
+        <CardTitle className="text-base font-normal">Treasury</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">$15,231.89</div>
@@ -61,7 +53,7 @@ export function RevenueChart() {
               <Line
                 type="monotone"
                 strokeWidth={2}
-                dataKey="revenue"
+                dataKey="treasury"
                 activeDot={{
                   r: 6,
                   style: { fill: `hsl(var(--primary))`, opacity: 0.25 },

@@ -10,32 +10,24 @@ import {
 
 const data = [
   {
-    average: 400,
-    today: 240,
+    market: 4,
+    apy: 6,
   },
   {
-    average: 300,
-    today: 139,
+    market: 6,
+    apy: 6,
   },
   {
-    average: 200,
-    today: 980,
+    market: 8,
+    apy: 6,
   },
   {
-    average: 278,
-    today: 390,
+    market: 2,
+    apy: 6,
   },
   {
-    average: 189,
-    today: 480,
-  },
-  {
-    average: 239,
-    today: 380,
-  },
-  {
-    average: 349,
-    today: 430,
+    market: 4,
+    apy: 6,
   },
 ];
 
@@ -45,7 +37,7 @@ export function RevenueCompareChart() {
       <CardHeader>
         <CardTitle>Compare with market</CardTitle>
         <CardDescription>
-          Compare your revenue with the market average
+          Compare our APY with the market average
         </CardDescription>
       </CardHeader>
       <CardContent className="pb-4">
@@ -68,18 +60,18 @@ export function RevenueCompareChart() {
                         <div className="grid grid-cols-2 gap-2">
                           <div className="flex flex-col">
                             <span className="text-[0.70rem] uppercase text-muted-foreground">
-                              Average
+                              Market
                             </span>
                             <span className="font-bold text-muted-foreground">
-                              {payload[0].value}
+                              {payload[0].value}%
                             </span>
                           </div>
                           <div className="flex flex-col">
                             <span className="text-[0.70rem] uppercase text-muted-foreground">
-                              Today
+                              Our APY
                             </span>
                             <span className="font-bold">
-                              {payload[1].value}
+                              {payload[1].value}%
                             </span>
                           </div>
                         </div>
@@ -93,7 +85,7 @@ export function RevenueCompareChart() {
               <Line
                 type="monotone"
                 strokeWidth={2}
-                dataKey="average"
+                dataKey="market"
                 activeDot={{
                   r: 6,
                   style: { fill: `hsl(var(--primary))`, opacity: 0.25 },
@@ -107,7 +99,7 @@ export function RevenueCompareChart() {
               />
               <Line
                 type="monotone"
-                dataKey="today"
+                dataKey="apy"
                 strokeWidth={2}
                 activeDot={{
                   r: 8,
