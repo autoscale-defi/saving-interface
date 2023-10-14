@@ -1,7 +1,7 @@
+'use client';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -16,9 +16,7 @@ export function DefiWallet() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
-        <Button onClick={() => {}}>Connect Wallet</Button>
-      </DialogTrigger>
+      <Button onClick={() => setOpen(true)}>Connect Wallet</Button>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Connect your wallet</DialogTitle>

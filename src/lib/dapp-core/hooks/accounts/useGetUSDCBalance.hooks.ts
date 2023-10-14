@@ -5,12 +5,14 @@ import { toReadableNumber } from '@/lib/amount';
 import { isNil } from 'lodash';
 
 export const useGetUSDCBalance = () => {
-  const accounts = useAccount();
+  const account = useAccount();
   const { data } = useQuery(
-    ['usdc-balance'],
-    () => getUSDCBalance(accounts?.address || ''),
-    { enabled: !!accounts?.address }
+    ['usdc-balance', account?.address],
+    () => getUSDCBalance(account?.address || ''),
+    { enabled: Boolean(account?.address) }
   );
+
+  if (!account?.address) return 0;
 
   if (isNil(data)) return undefined;
 

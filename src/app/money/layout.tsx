@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { useGetUSDCBalance } from '@/lib/dapp-core/hooks/accounts/useGetUSDCBalance.hooks';
 import { formatUSDAmount } from '@/lib/amount';
 import { Placeholder } from '@/components/ui/placeholder';
+import { isNil } from 'lodash';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const USDCBalance = useGetUSDCBalance();
@@ -28,7 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           <CardContent>
             <div className="text-md font-bold">
-              {USDCBalance || 0 ? (
+              {!isNil(USDCBalance) ? (
                 formatUSDAmount(USDCBalance)
               ) : (
                 <Placeholder />
