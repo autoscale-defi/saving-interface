@@ -4,18 +4,17 @@ import Link from 'next/link';
 
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/theme-toggle.component';
-import { Button } from '@/components/ui/button';
-import { useAccount, useWebWallet } from '@/lib/dapp-core';
+import { useAccount } from '@/lib/dapp-core';
 import { UserConnectedInformations } from '@/app/_components/user-connected-informations.component';
-import { TransactionsInformations } from '@/app/_components/transactions-informations.component';
 import { usePathname } from 'next/navigation';
 import { DollarSign } from 'lucide-react';
+import { DefiWallet } from '@/app/_components/defi-wallet.component';
+
 export function NavBar({
   className,
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
   const account = useAccount();
-  const { login } = useWebWallet();
   const path = usePathname();
 
   return (
@@ -23,7 +22,7 @@ export function NavBar({
       className={cn('flex w-full items-center justify-between', className)}
       {...props}
     >
-      <div className="flex items-center justify-center space-x-2 lg:space-x-4">
+      <div className="flex items-center justify-center space-x-2 md:space-x-4">
         <div className="rounded-xl bg-primary/30 p-1">
           <DollarSign className="h-5 w-5"></DollarSign>
         </div>
@@ -49,12 +48,9 @@ export function NavBar({
 
       <div className="flex items-center space-x-2">
         {account ? (
-          <>
-            <UserConnectedInformations account={account} />
-            <TransactionsInformations />
-          </>
+          <UserConnectedInformations account={account} />
         ) : (
-          <Button onClick={login}>Connect Wallet</Button>
+          <DefiWallet />
         )}
 
         <ThemeToggle />

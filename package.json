@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
     "@multiversx/sdk-core": "^12.6.0",
     "@multiversx/sdk-extension-provider": "^3.0.0",
     "@multiversx/sdk-hw-provider": "^6.2.0",
@@ -25,6 +26,7 @@
     "bignumber.js": "^9.1.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "framer-motion": "^10.16.4",
     "lodash": "^4.17.21",
     "lucide-react": "^0.279.0",
     "next": "latest",
@@ -41,6 +43,7 @@
   "devDependencies": {
     "@types/lodash": "^4.14.199",
     "@types/node": "latest",
+    "@types/qrcode": "^1.5.2",
     "@types/qs": "^6.9.7",
     "@types/react": "latest",
     "@types/react-dom": "latest",

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getUSDCBalance } from '@/lib/dapp-core/services/accounts.services';
 import { useAccount } from '@/lib/dapp-core';
 import { toReadableNumber } from '@/lib/amount';
+import { isNil } from 'lodash';
 
 export const useGetUSDCBalance = () => {
   const accounts = useAccount();
@@ -11,7 +12,7 @@ export const useGetUSDCBalance = () => {
     { enabled: !!accounts?.address }
   );
 
-  if (!data) return undefined;
+  if (isNil(data)) return undefined;
 
   return toReadableNumber({
     amount: data.balance,

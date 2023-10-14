@@ -12,6 +12,7 @@ import {
   useTransactionsContext,
 } from '../../providers/Transactions.providers';
 import * as accountsService from '../../services/accounts.services';
+import { Address } from '@multiversx/sdk-core/out';
 
 export function useSendTransactions() {
   const authContext = useAuthContext();
@@ -35,11 +36,8 @@ export function useSendTransactions() {
         onError(error: any): void;
         onSign(): void;
       }) => {
-        if (!authContext!.loginMethod) {
-          throw new Error('No login method');
-        }
-
-        const provider = authContext!.providers[authContext!.loginMethod];
+        const provider =
+          authContext!.providers[authContext!.loginMethod || 'wallet'];
 
         if ('init' in provider) {
           await provider.init();
@@ -116,11 +114,8 @@ export function useSendTransactions() {
         onError(error: any): void;
         onSign(): void;
       }) => {
-        if (!authContext!.loginMethod) {
-          throw new Error('No login method');
-        }
-
-        const provider = authContext!.providers[authContext!.loginMethod];
+        const provider =
+          authContext!.providers[authContext!.loginMethod || 'wallet'];
 
         if ('init' in provider) {
           await provider.init();

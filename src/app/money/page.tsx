@@ -19,7 +19,7 @@ export default function MyMoney() {
         <TabsContent className="py-4" value="withdraw">
           Withdraw
         </TabsContent>
-        <TabsContent className="py-4" value="withdraw">
+        <TabsContent className="py-4" value="claim">
           Claim rewards
         </TabsContent>
       </Tabs>

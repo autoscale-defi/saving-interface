@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { AppProviders } from '@/providers/app.provider';
 import { NavBar } from '@/app/_components/nav-bar.component';
+import { TransactionToastList } from '@/components/TransactionsToast/TransactionToastList';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
               <div className="py-12">{children}</div>
             </div>
           </div>
+          <TransactionToastList />
         </AppProviders>
       </body>
     </html>

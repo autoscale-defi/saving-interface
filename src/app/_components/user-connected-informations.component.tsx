@@ -18,6 +18,7 @@ type Props = {
 };
 
 function formatAddress(address: string, number: number) {
+  if (!address) return '';
   return `${address.substring(0, number)}...${address.substring(
     address.length - number
   )}`;

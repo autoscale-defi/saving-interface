@@ -13,7 +13,11 @@ export async function getUSDCBalance(
 ): Promise<{ balance: number; decimals: number }> {
   return axios
     .get(
-      `${process.env.NEXT_PUBLIC_API_URL}/accounts/${address}/tokens/USDC-79d9a4`
+      `${
+        process.env.NEXT_PUBLIC_API_URL
+      }/accounts/${address}/tokens/${JSON.parse(
+        process.env.NEXT_PUBLIC_USDC || '{}'
+      )?.identifier}`
     )
     .then((res) => res.data);
 }

@@ -28,7 +28,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           <CardContent>
             <div className="text-md font-bold">
-              {USDCBalance ? formatUSDAmount(USDCBalance) : <Placeholder />}
+              {USDCBalance || 0 ? (
+                formatUSDAmount(USDCBalance)
+              ) : (
+                <Placeholder />
+              )}
             </div>
           </CardContent>
         </Card>

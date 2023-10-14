@@ -1,5 +1,3 @@
-'use client';
-
 import * as React from 'react';
 import useLocalStorageState from 'use-local-storage-state';
 import { WalletProvider } from '@multiversx/sdk-web-wallet-provider';
