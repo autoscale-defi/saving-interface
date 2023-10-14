@@ -11,16 +11,29 @@ import React from 'react';
 import { useExtensionLogin, useIsLoggedIn } from '@/lib/dapp-core';
 import { useIsFirefox } from '@/lib/utils';
 
-export function DefiWallet() {
+export function DefiWallet({
+  onLogin,
+  buttonClassName,
+}: {
+  onLogin?: () => void;
+  buttonClassName?: string;
+}) {
   const [open, setOpen] = React.useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <Button onClick={() => setOpen(true)}>Connect Wallet</Button>
+      <Button className={buttonClassName} onClick={() => setOpen(true)}>
+        Connect Wallet
+      </Button>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Connect your wallet</DialogTitle>
-          <XPortalContent onLogin={() => setOpen(false)} />
+          <XPortalContent
+            onLogin={() => {
+              setOpen(false);
+              onLogin?.();
+            }}
+          />
         </DialogHeader>
       </DialogContent>
     </Dialog>

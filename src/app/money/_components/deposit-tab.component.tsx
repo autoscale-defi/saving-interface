@@ -6,14 +6,16 @@ import { PercentRange } from '@/components/ui/percent-range';
 import React from 'react';
 import { useDepositTransactions } from '@/lib/dapp-core/hooks/transactions/useDepositTransactions.hooks';
 import { useGetUSDCBalance } from '@/lib/dapp-core/hooks/accounts/useGetUSDCBalance.hooks';
-import { useAccount } from '@/lib/dapp-core';
+import { useAccount, useIsLoggedIn } from '@/lib/dapp-core';
 import { SignDialog } from '@/components/sign-dialog.component';
 import { NumericalInput } from '@/components/numerical-input.component';
+import { DefiWallet } from '@/app/_components/defi-wallet.component';
 
 export function DepositTab() {
   const balance = useGetUSDCBalance();
   const account = useAccount();
   const [sessionId, setSessionId] = React.useState<string | null>(null);
+  const isLoggedIn = useIsLoggedIn();
 
   const sendDepositTransactions = useDepositTransactions({
     address: account?.address,
@@ -84,9 +86,13 @@ export function DepositTab() {
               </div>
             </div>
 
-            <Button className="w-full" onClick={handleDeposit}>
-              Deposit USDC
-            </Button>
+            {isLoggedIn ? (
+              <Button className="w-full" onClick={handleDeposit}>
+                Deposit USDC
+              </Button>
+            ) : (
+              <DefiWallet buttonClassName="w-full" onLogin={handleDeposit} />
+            )}
           </div>
         </CardContent>
       </Card>
