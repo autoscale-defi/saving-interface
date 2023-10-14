@@ -8,6 +8,7 @@ import { useDepositTransactions } from '@/lib/dapp-core/hooks/transactions/useDe
 import { useGetUSDCBalance } from '@/lib/dapp-core/hooks/accounts/useGetUSDCBalance.hooks';
 import { useAccount } from '@/lib/dapp-core';
 import { SignDialog } from '@/components/sign-dialog.component';
+import { NumericalInput } from '@/components/numerical-input.component';
 
 export function DepositTab() {
   const balance = useGetUSDCBalance();
@@ -17,10 +18,12 @@ export function DepositTab() {
   const sendDepositTransactions = useDepositTransactions({
     address: account?.address,
   });
-  const [amount, setAmount] = React.useState(0);
+  const [amount, setAmount] = React.useState('0');
 
   const handleDeposit = React.useCallback(() => {
-    const { signTransaction, sessionId } = sendDepositTransactions(amount);
+    const { signTransaction, sessionId } = sendDepositTransactions(
+      Number(amount)
+    );
 
     setSessionId(sessionId);
 
@@ -37,7 +40,7 @@ export function DepositTab() {
   const setPercent = React.useCallback(
     (percent: number) => {
       if (!balance) return 0;
-      setAmount(balance * (percent / 100));
+      setAmount((balance * (percent / 100)).toString());
     },
     [balance]
   );
@@ -45,7 +48,7 @@ export function DepositTab() {
   const currentPercent = React.useMemo(() => {
     if (!balance) return 0;
 
-    return (amount / balance) * 100;
+    return Math.min((Number(amount) / balance) * 100, 100);
   }, [amount, balance]);
 
   return (
@@ -62,16 +65,15 @@ export function DepositTab() {
           <div className="space-y-8">
             <div className="">
               <div className="flex w-full max-w-sm items-center space-x-2">
-                <Input
+                <NumericalInput
                   placeholder="Amount"
                   value={amount}
-                  type={'number'}
-                  onChange={(e) => setAmount(Number(e.target.value))}
+                  onUserInput={(value) => setAmount(value)}
                 />
                 <Button
                   variant="outline"
                   className="text-xs"
-                  onClick={() => setAmount(balance || 0)}
+                  onClick={() => setAmount(balance?.toString() || '0')}
                 >
                   Max
                 </Button>

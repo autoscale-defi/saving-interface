@@ -6,7 +6,8 @@ import { isNil } from 'lodash';
 
 export const useGetUSDCBalance = () => {
   const account = useAccount();
-  const { data } = useQuery(
+
+  const { data, isLoading } = useQuery(
     ['usdc-balance', account?.address],
     () => getUSDCBalance(account?.address || ''),
     { enabled: Boolean(account?.address) }
@@ -14,7 +15,9 @@ export const useGetUSDCBalance = () => {
 
   if (!account?.address) return 0;
 
-  if (isNil(data)) return undefined;
+  if (isLoading) return undefined;
+
+  if (isNil(data)) return 0;
 
   return toReadableNumber({
     amount: data.balance,

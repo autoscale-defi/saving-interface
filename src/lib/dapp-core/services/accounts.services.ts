@@ -11,13 +11,14 @@ export async function getAccount(apiAddress: string, address: string) {
 export async function getUSDCBalance(
   address: string
 ): Promise<{ balance: number; decimals: number }> {
-  return axios
-    .get(
-      `${
-        process.env.NEXT_PUBLIC_API_URL
-      }/accounts/${address}/tokens/${JSON.parse(
-        process.env.NEXT_PUBLIC_USDC || '{}'
-      )?.identifier}`
-    )
+  const identifier = JSON.parse(process.env.NEXT_PUBLIC_USDC || '{}')
+    ?.identifier;
+
+  const tokens = await axios
+    .get(`${process.env.NEXT_PUBLIC_API_URL}/accounts/${address}/tokens`)
     .then((res) => res.data);
+
+  const token = tokens.find((token: any) => token.identifier === identifier);
+
+  return token;
 }
