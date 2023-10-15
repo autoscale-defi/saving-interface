@@ -33,8 +33,6 @@ export const useGetASUSDCToken = () => {
     { enabled: Boolean(account?.address) }
   );
 
-  if (!account?.address) return 0;
-
   if (isLoading) return undefined;
 
   return data;

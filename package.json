@@ -13,6 +13,7 @@
     "@multiversx/sdk-core": "^12.6.0",
     "@multiversx/sdk-extension-provider": "^3.0.0",
     "@multiversx/sdk-hw-provider": "^6.2.0",
+    "@multiversx/sdk-network-providers": "^2.0.0",
     "@multiversx/sdk-wallet-connect-provider": "^4.0.2",
     "@multiversx/sdk-web-wallet-provider": "^3.0.0",
     "@radix-ui/react-avatar": "^1.0.4",
