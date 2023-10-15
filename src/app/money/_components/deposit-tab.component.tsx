@@ -10,9 +10,14 @@ import { useAccount, useIsLoggedIn } from '@/lib/dapp-core';
 import { SignDialog } from '@/components/sign-dialog.component';
 import { NumericalInput } from '@/components/numerical-input.component';
 import { DefiWallet } from '@/app/_components/defi-wallet.component';
+import {
+  useGetASUSDCBalance,
+  useGetASUSDCToken,
+} from '@/lib/dapp-core/hooks/accounts/useGetASUSDCBalance.hooks';
 
 export function DepositTab() {
-  const balance = useGetUSDCBalance();
+  const usdcBalance = useGetUSDCBalance();
+  const asusdcToken = useGetASUSDCToken();
   const account = useAccount();
   const [sessionId, setSessionId] = React.useState<string | null>(null);
   const isLoggedIn = useIsLoggedIn();
@@ -24,7 +29,8 @@ export function DepositTab() {
 
   const handleDeposit = React.useCallback(() => {
     const { signTransaction, sessionId } = sendDepositTransactions(
-      Number(amount)
+      Number(amount),
+      asusdcToken
     );
 
     setSessionId(sessionId);
@@ -41,17 +47,17 @@ export function DepositTab() {
 
   const setPercent = React.useCallback(
     (percent: number) => {
-      if (!balance) return 0;
-      setAmount((balance * (percent / 100)).toString());
+      if (!usdcBalance) return 0;
+      setAmount((usdcBalance * (percent / 100)).toString());
     },
-    [balance]
+    [usdcBalance]
   );
 
   const currentPercent = React.useMemo(() => {
-    if (!balance) return 0;
+    if (!usdcBalance) return 0;
 
-    return Math.min((Number(amount) / balance) * 100, 100);
-  }, [amount, balance]);
+    return Math.min((Number(amount) / usdcBalance) * 100, 100);
+  }, [amount, usdcBalance]);
 
   return (
     <>
@@ -75,7 +81,7 @@ export function DepositTab() {
                 <Button
                   variant="outline"
                   className="text-xs"
-                  onClick={() => setAmount(balance?.toString() || '0')}
+                  onClick={() => setAmount(usdcBalance?.toString() || '0')}
                 >
                   Max
                 </Button>
