@@ -1,11 +1,21 @@
 'use client';
-import { Address, SmartContract, TokenPayment } from '@multiversx/sdk-core/out';
+import {
+  Address,
+  SmartContract,
+  TokenPayment,
+  TokenTransfer,
+} from '@multiversx/sdk-core/out';
 import { getControllerAbi } from '@/lib/dapp-core/abi/controller.abi';
 import { useAccount, useSendTransactions } from '@/lib/dapp-core';
+import BigNumber from 'bignumber.js';
 
 const GAS_LIMIT = 500000000;
 
-function getDepositTransactions(amount: number, address?: string) {
+function getDepositTransactions(
+  amount: number,
+  address?: string,
+  asusdc?: any
+) {
   if (!address) {
     throw new Error('address is required');
   }
@@ -16,12 +26,18 @@ function getDepositTransactions(amount: number, address?: string) {
   });
 
   const usdc = JSON.parse(process.env.NEXT_PUBLIC_USDC || '{}');
-
+  console.log(asusdc);
   return contract.methods
     .deposit()
-    .withSingleESDTTransfer(
-      TokenPayment.fungibleFromAmount(usdc.identifier, amount, usdc.decimals)
-    )
+    .withMultiESDTNFTTransfer([
+      TokenTransfer.fungibleFromAmount(usdc.identifier, amount, usdc.decimals),
+      TokenTransfer.metaEsdtFromAmount(
+        asusdc.collection,
+        asusdc.nonce,
+        asusdc.balance / 10 ** asusdc.decimals,
+        asusdc.decimals
+      ),
+    ])
     .withGasLimit(GAS_LIMIT)
     .withSender(new Address(address))
     .check()
@@ -31,9 +47,9 @@ function getDepositTransactions(amount: number, address?: string) {
 export function useDepositTransactions({ address }: { address?: string }) {
   const { sendTransaction } = useSendTransactions();
 
-  return (amount: number) =>
+  return (amount: number, asusdcToken: any) =>
     sendTransaction({
-      transaction: getDepositTransactions(amount, address),
+      transaction: getDepositTransactions(amount, address, asusdcToken),
       sessionInformations: { action: 'deposit' },
     });
 }
