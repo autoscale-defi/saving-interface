@@ -26,7 +26,7 @@ function getDepositTransactions(
   });
 
   const usdc = JSON.parse(process.env.NEXT_PUBLIC_USDC || '{}');
-  console.log(asusdc);
+
   return contract.methods
     .deposit()
     .withMultiESDTNFTTransfer([

@@ -5,14 +5,18 @@ import { useGetUSDCBalance } from '@/lib/dapp-core/hooks/accounts/useGetUSDCBala
 import { formatUSDAmount } from '@/lib/amount';
 import { Placeholder } from '@/components/ui/placeholder';
 import { isNil } from 'lodash';
+import { useClaimAmount } from '@/lib/dapp-core/hooks/transactions/useClaimTransactions.hooks';
+import { ClaimCard } from '@/app/_components/claim-card.component';
+import { useGetASUSDCBalance } from '@/lib/dapp-core/hooks/accounts/useGetASUSDCBalance.hooks';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const USDCBalance = useGetUSDCBalance();
+  const AUSDCBalance = useGetASUSDCBalance();
 
   return (
-    <div className="flex flex-col-reverse gap-4 md:flex-row">
-      <div>{children}</div>
-      <div className="flex flex-row gap-2 md:flex-col">
+    <div className="flex flex-col gap-12">
+      <div className="flex flex-row gap-4">
+        <ClaimCard />
         <Card>
           <CardHeader className="pb-1">
             <CardTitle className="text-xs font-medium">Fixed APY</CardTitle>
@@ -37,7 +41,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </CardContent>
         </Card>
+        <Card>
+          <CardHeader className="pb-1">
+            <CardTitle className="text-xs font-medium">
+              My USDC deposit
+            </CardTitle>
+          </CardHeader>
+
+          <CardContent>
+            <div className="text-md font-bold">
+              {!isNil(USDCBalance) ? (
+                formatUSDAmount(AUSDCBalance)
+              ) : (
+                <Placeholder />
+              )}
+            </div>
+          </CardContent>
+        </Card>
       </div>
+      <div>{children}</div>
     </div>
   );
 }
