@@ -10,11 +10,15 @@ import { useAccount, useIsLoggedIn } from '@/lib/dapp-core';
 import { SignDialog } from '@/components/sign-dialog.component';
 import { NumericalInput } from '@/components/numerical-input.component';
 import { DefiWallet } from '@/app/_components/defi-wallet.component';
-import { useGetASUSDCBalance } from '@/lib/dapp-core/hooks/accounts/useGetASUSDCBalance.hooks';
+import {
+  useGetASUSDCBalance,
+  useGetASUSDCToken,
+} from '@/lib/dapp-core/hooks/accounts/useGetASUSDCBalance.hooks';
 import { useWithdrawTransactions } from '@/lib/dapp-core/hooks/transactions/useWithdrawTransactions.hook';
 
 export function WithdrawTab() {
   const balance = useGetASUSDCBalance();
+  const asusdcToken = useGetASUSDCToken();
   const account = useAccount();
   const [sessionId, setSessionId] = React.useState<string | null>(null);
   const isLoggedIn = useIsLoggedIn();
@@ -26,7 +30,8 @@ export function WithdrawTab() {
 
   const handleWithdraw = React.useCallback(() => {
     const { signTransaction, sessionId } = sendWithdrawTransactions(
-      Number(amount)
+      Number(amount),
+      asusdcToken
     );
 
     setSessionId(sessionId);

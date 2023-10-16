@@ -18,6 +18,7 @@ export const useGetASUSDCBalance = () => {
   if (isLoading) return undefined;
 
   if (isNil(data)) return 0;
+
   return toReadableNumber({
     amount: data.balance,
     decimals: data.decimals,

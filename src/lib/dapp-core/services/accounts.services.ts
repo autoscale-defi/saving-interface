@@ -37,5 +37,5 @@ export async function getASUSDCBalance(
 
   const token = tokens.find((token: any) => token.collection === collection);
 
-  return token;
+  return token ? token : { balance: 0, decimals: 6, identifier: collection };
 }

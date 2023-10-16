@@ -26,11 +26,11 @@ function getWithdrawTransactions(
 
   return contract.methods
     .withdraw()
-    .withSingleESDTTransfer(
+    .withSingleESDTNFTTransfer(
       TokenTransfer.metaEsdtFromAmount(
         asusdc.collection,
         asusdc.nonce,
-        asusdc.balance / 10 ** asusdc.decimals,
+        amount,
         asusdc.decimals
       )
     )
@@ -43,9 +43,9 @@ function getWithdrawTransactions(
 export function useWithdrawTransactions({ address }: { address?: string }) {
   const { sendTransaction } = useSendTransactions();
 
-  return (amount: number) =>
+  return (amount: number, asusdc: any) =>
     sendTransaction({
-      transaction: getWithdrawTransactions(amount, address),
+      transaction: getWithdrawTransactions(amount, address, asusdc),
       sessionInformations: { action: 'withdraw' },
     });
 }
