@@ -3,6 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { DepositTab } from '@/app/money/_components/deposit-tab.component';
 import React from 'react';
+import { WithdrawTab } from './_components/withdraw-tab.component';
 
 export default function MyMoney() {
   return (
@@ -16,7 +17,7 @@ export default function MyMoney() {
           <DepositTab />
         </TabsContent>
         <TabsContent className="py-4" value="withdraw">
-          Withdraw
+          <WithdrawTab />
         </TabsContent>
       </Tabs>
     </div>
