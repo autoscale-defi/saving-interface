@@ -23,7 +23,7 @@ export const TransactionToastList = () => {
 
   return (
     <div className="fixed bottom-0 right-0 z-20 w-full p-4 md:max-w-[400px]">
-      <div className="border-light-label/10 space-y-3 rounded-2xl border p-4 shadow-lg">
+      <div className="space-y-3 rounded-2xl border-2 bg-background p-4 shadow-xl">
         <div className="flex flex-row justify-between">
           <span className="text-base font-semibold">Transactions</span>
 

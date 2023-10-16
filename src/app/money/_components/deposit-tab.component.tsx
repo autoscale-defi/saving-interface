@@ -1,7 +1,13 @@
 'use client';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { PercentRange } from '@/components/ui/percent-range';
 import React from 'react';
 import { useDepositTransactions } from '@/lib/dapp-core/hooks/transactions/useDepositTransactions.hooks';
@@ -14,6 +20,7 @@ import {
   useGetASUSDCBalance,
   useGetASUSDCToken,
 } from '@/lib/dapp-core/hooks/accounts/useGetASUSDCBalance.hooks';
+import { formatUSDAmount } from '@/lib/amount';
 
 export function DepositTab() {
   const usdcBalance = useGetUSDCBalance();
@@ -66,12 +73,18 @@ export function DepositTab() {
         setOpen={() => setSessionId(null)}
       />
       <Card>
-        <CardHeader className="pb-4">
+        <CardHeader>
           <CardTitle>Deposit</CardTitle>
+          <CardDescription>
+            Deposit your USDC and earn <span className="font-bold">6% APY</span>
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-8">
-            <div className="">
+            <div className="space-y-1">
+              <p className="mx-1 text-xs text-muted-foreground">
+                Balance: {formatUSDAmount(usdcBalance)}
+              </p>
               <div className="flex w-full max-w-sm items-center space-x-2">
                 <NumericalInput
                   placeholder="Amount"
@@ -91,7 +104,6 @@ export function DepositTab() {
                 <PercentRange percent={currentPercent} onChange={setPercent} />
               </div>
             </div>
-
             {isLoggedIn ? (
               <Button className="w-full" onClick={handleDeposit}>
                 Deposit USDC

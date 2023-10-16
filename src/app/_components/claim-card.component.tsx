@@ -38,7 +38,7 @@ export function ClaimCard() {
         open={Boolean(sessionId)}
         setOpen={() => setSessionId(null)}
       />
-      <Card className={'flew-row flex items-center'}>
+      <Card className={'flew-row flex items-center justify-between'}>
         <div>
           <CardHeader className="pb-1">
             <CardTitle className="text-xs font-medium">

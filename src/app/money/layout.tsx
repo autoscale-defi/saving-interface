@@ -8,58 +8,56 @@ import { isNil } from 'lodash';
 import { useClaimAmount } from '@/lib/dapp-core/hooks/transactions/useClaimTransactions.hooks';
 import { ClaimCard } from '@/app/_components/claim-card.component';
 import { useGetASUSDCBalance } from '@/lib/dapp-core/hooks/accounts/useGetASUSDCBalance.hooks';
+import React from 'react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const USDCBalance = useGetUSDCBalance();
   const AUSDCBalance = useGetASUSDCBalance();
 
   return (
-    <div className="flex flex-col gap-12">
-      <div className="flex flex-row gap-4">
-        <ClaimCard />
-        <Card>
-          <CardHeader className="pb-1">
-            <CardTitle className="text-xs font-medium">Fixed APY</CardTitle>
-          </CardHeader>
+    <div className="flex flex-col gap-8">
+      <h2 className="text-3xl font-bold tracking-tight">Money</h2>
 
-          <CardContent>
-            <div className="text-md font-bold">6%</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-1">
-            <CardTitle className="text-xs font-medium">My USDC</CardTitle>
-          </CardHeader>
+      <div className="flex flex-row gap-12">
+        <div>{children}</div>
+        <div className="flex flex-col gap-4">
+          <ClaimCard />
 
-          <CardContent>
-            <div className="text-md font-bold">
-              {!isNil(USDCBalance) ? (
-                formatUSDAmount(USDCBalance)
-              ) : (
-                <Placeholder />
-              )}
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-1">
-            <CardTitle className="text-xs font-medium">
-              My USDC deposit
-            </CardTitle>
-          </CardHeader>
+          <Card>
+            <CardHeader className="pb-1">
+              <CardTitle className="text-xs font-medium">My USDC</CardTitle>
+            </CardHeader>
 
-          <CardContent>
-            <div className="text-md font-bold">
-              {!isNil(USDCBalance) ? (
-                formatUSDAmount(AUSDCBalance)
-              ) : (
-                <Placeholder />
-              )}
-            </div>
-          </CardContent>
-        </Card>
+            <CardContent>
+              <div className="text-md font-bold">
+                {!isNil(USDCBalance) ? (
+                  formatUSDAmount(USDCBalance)
+                ) : (
+                  <Placeholder />
+                )}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-1">
+              <CardTitle className="text-xs font-medium">
+                My USDC deposit
+              </CardTitle>
+            </CardHeader>
+
+            <CardContent>
+              <div className="text-md font-bold">
+                {!isNil(USDCBalance) ? (
+                  formatUSDAmount(AUSDCBalance)
+                ) : (
+                  <Placeholder />
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
-      <div>{children}</div>
     </div>
   );
 }
