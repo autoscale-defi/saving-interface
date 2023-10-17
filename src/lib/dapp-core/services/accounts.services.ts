@@ -39,3 +39,18 @@ export async function getASUSDCBalance(
 
   return token ? token : { balance: 0, decimals: 6, identifier: collection };
 }
+
+export async function getASUUSDCBalance(address: string): Promise<any[]> {
+  const collection = JSON.parse(process.env.NEXT_PUBLIC_ASUUSDC || '{}')
+    ?.identifier;
+
+  const tokens = await axios
+    .get(
+      `${process.env.NEXT_PUBLIC_API_URL}/accounts/${address}/tokens?includeMetaESDT=true`
+    )
+    .then((res) => res.data);
+
+  const token = tokens.filter((token: any) => token.collection === collection);
+
+  return token ? token : [];
+}

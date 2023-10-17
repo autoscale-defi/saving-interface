@@ -1,455 +1,450 @@
 {
-    "buildInfo": {
-        "rustc": {
-            "version": "1.71.0-nightly",
-            "commitHash": "a2b1646c597329d0a25efa3889b66650f65de1de",
-            "commitDate": "2023-05-25",
-            "channel": "Nightly",
-            "short": "rustc 1.71.0-nightly (a2b1646c5 2023-05-25)"
-        },
-        "contractCrate": {
-            "name": "controller",
-            "version": "0.0.0"
-        },
-        "framework": {
-            "name": "multiversx-sc",
-            "version": "0.43.4"
-        }
+  "buildInfo": {
+    "rustc": {
+      "version": "1.71.0-nightly",
+      "commitHash": "a2b1646c597329d0a25efa3889b66650f65de1de",
+      "commitDate": "2023-05-25",
+      "channel": "Nightly",
+      "short": "rustc 1.71.0-nightly (a2b1646c5 2023-05-25)"
     },
-    "name": "ControllerContract",
-    "constructor": {
-        "inputs": [
-            {
-                "name": "usdc_token_id",
-                "type": "TokenIdentifier"
-            },
-            {
-                "name": "phase",
-                "type": "Phase"
-            }
-        ],
-        "outputs": []
+    "contractCrate": {
+      "name": "controller",
+      "version": "0.0.0"
     },
-    "endpoints": [
-        {
-            "name": "deposit",
-            "mutability": "mutable",
-            "payableInTokens": [
-                "*"
-            ],
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "EsdtTokenPayment"
-                }
-            ]
-        },
-        {
-            "name": "withdraw",
-            "mutability": "mutable",
-            "payableInTokens": [
-                "*"
-            ],
-            "inputs": [
-                {
-                    "name": "opt_force_withdraw",
-                    "type": "optional<bool>",
-                    "multi_arg": true
-                }
-            ],
-            "outputs": [
-                {
-                    "type": "List<EsdtTokenPayment>"
-                }
-            ]
-        },
-        {
-            "name": "unbond",
-            "mutability": "mutable",
-            "payableInTokens": [
-                "*"
-            ],
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "EsdtTokenPayment"
-                }
-            ]
-        },
-        {
-            "name": "claimRewards",
-            "mutability": "mutable",
-            "payableInTokens": [
-                "*"
-            ],
-            "inputs": [],
-            "outputs": []
-        },
-        {
-            "name": "claimControllerRewards",
-            "mutability": "mutable",
-            "inputs": [],
-            "outputs": []
-        },
-        {
-            "name": "rebalance",
-            "mutability": "mutable",
-            "inputs": [],
-            "outputs": []
-        },
-        {
-            "name": "addPlatform",
-            "onlyOwner": true,
-            "mutability": "mutable",
-            "inputs": [],
-            "outputs": []
-        },
-        {
-            "name": "setPlatformDistribution",
-            "onlyOwner": true,
-            "mutability": "mutable",
-            "inputs": [],
-            "outputs": []
-        },
-        {
-            "name": "setMinUnbondEpochs",
-            "mutability": "mutable",
-            "inputs": [
-                {
-                    "name": "min_unbond_epochs",
-                    "type": "u64"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "getControllerParameters",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "ControllerParametersDTO"
-                }
-            ]
-        },
-        {
-            "name": "getForceWithdrawFeesPercentage",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "u64"
-                }
-            ]
-        },
-        {
-            "name": "registerSavingsToken",
-            "onlyOwner": true,
-            "mutability": "mutable",
-            "payableInTokens": [
-                "EGLD"
-            ],
-            "inputs": [
-                {
-                    "name": "token_display_name",
-                    "type": "bytes"
-                },
-                {
-                    "name": "token_ticker",
-                    "type": "bytes"
-                },
-                {
-                    "name": "num_decimals",
-                    "type": "u32"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "registerUnbondToken",
-            "onlyOwner": true,
-            "mutability": "mutable",
-            "payableInTokens": [
-                "EGLD"
-            ],
-            "inputs": [
-                {
-                    "name": "token_display_name",
-                    "type": "bytes"
-                },
-                {
-                    "name": "token_ticker",
-                    "type": "bytes"
-                },
-                {
-                    "name": "num_decimals",
-                    "type": "u32"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "docs": [
-                "Calculate the rewards for a given position.",
-                "It sums up the rewards and the accumulated rewards based on the proportion of the shares given.",
-                "",
-                "This function has to be called when:",
-                "- you want to know off-chain the rewards of a given position",
-                "- A user claims his rewards",
-                "- We merge multiple positions into one (the sum of the old positions ends up in the accumulated rewards of the new position)"
-            ],
-            "name": "calculateRewardsForGivenPosition",
-            "mutability": "readonly",
-            "inputs": [
-                {
-                    "name": "savings_token_amount",
-                    "type": "BigUint"
-                },
-                {
-                    "name": "attributes",
-                    "type": "SavingsTokenAttributes"
-                }
-            ],
-            "outputs": [
-                {
-                    "type": "BigUint"
-                }
-            ]
-        },
-        {
-            "name": "setRewardsPerSharePerBlock",
-            "onlyOwner": true,
-            "mutability": "mutable",
-            "inputs": [
-                {
-                    "name": "new_rewards_per_share_per_block",
-                    "type": "BigUint"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "setProduceRewardsEnabled",
-            "onlyOwner": true,
-            "mutability": "mutable",
-            "inputs": [
-                {
-                    "name": "enabled",
-                    "type": "bool"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "isProduceRewardsEnabled",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "bool"
-                }
-            ]
-        },
-        {
-            "name": "getLastUpdateBlockNonce",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "u64"
-                }
-            ]
-        },
-        {
-            "name": "getRewardsPerShare",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "BigUint"
-                }
-            ]
-        },
-        {
-            "docs": [
-                "The amount of rewards per share that are produced in one block.",
-                "Can only be changed manually by the owner.",
-                "This is a variation of the APR."
-            ],
-            "name": "getRewardsPerSharePerBlock",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "BigUint"
-                }
-            ]
-        },
-        {
-            "docs": [
-                "Will maybe be calculated dynamically in the future"
-            ],
-            "name": "getPhase",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "Phase"
-                }
-            ]
-        },
-        {
-            "name": "setPhase",
-            "onlyOwner": true,
-            "mutability": "mutable",
-            "inputs": [
-                {
-                    "name": "phase",
-                    "type": "Phase"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "setDepositFees",
-            "onlyOwner": true,
-            "mutability": "mutable",
-            "inputs": [
-                {
-                    "name": "phase",
-                    "type": "Phase"
-                },
-                {
-                    "name": "fees_perc",
-                    "type": "u64"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "getDepositFees",
-            "mutability": "readonly",
-            "inputs": [
-                {
-                    "name": "phase",
-                    "type": "Phase"
-                }
-            ],
-            "outputs": [
-                {
-                    "type": "u64"
-                }
-            ]
-        },
-        {
-            "name": "setVaultAddress",
-            "onlyOwner": true,
-            "mutability": "mutable",
-            "inputs": [
-                {
-                    "name": "vault_addr",
-                    "type": "Address"
-                }
-            ],
-            "outputs": []
-        },
-        {
-            "name": "getVaultAddress",
-            "mutability": "readonly",
-            "inputs": [],
-            "outputs": [
-                {
-                    "type": "Address"
-                }
-            ]
-        }
-    ],
-    "events": [],
-    "hasCallback": false,
-    "types": {
-        "ControllerParametersDTO": {
-            "type": "struct",
-            "fields": [
-                {
-                    "name": "phase",
-                    "type": "Phase"
-                },
-                {
-                    "name": "min_unbond_epochs",
-                    "type": "u64"
-                },
-                {
-                    "name": "force_withdraw_fees_percentage",
-                    "type": "u64"
-                },
-                {
-                    "name": "deposit_fees_percentage",
-                    "type": "u64"
-                },
-                {
-                    "name": "rewards_per_share_per_block",
-                    "type": "BigUint"
-                },
-                {
-                    "name": "usdc_token_id",
-                    "type": "TokenIdentifier"
-                },
-                {
-                    "name": "savings_token_id",
-                    "type": "TokenIdentifier"
-                },
-                {
-                    "name": "unbond_token_id",
-                    "type": "TokenIdentifier"
-                }
-            ]
-        },
-        "EsdtTokenPayment": {
-            "type": "struct",
-            "fields": [
-                {
-                    "name": "token_identifier",
-                    "type": "TokenIdentifier"
-                },
-                {
-                    "name": "token_nonce",
-                    "type": "u64"
-                },
-                {
-                    "name": "amount",
-                    "type": "BigUint"
-                }
-            ]
-        },
-        "Phase": {
-            "type": "enum",
-            "variants": [
-                {
-                    "name": "Accumulation",
-                    "discriminant": 0
-                },
-                {
-                    "name": "Depletion",
-                    "discriminant": 1
-                }
-            ]
-        },
-        "SavingsTokenAttributes": {
-            "type": "struct",
-            "fields": [
-                {
-                    "name": "initial_rewards_per_share",
-                    "type": "BigUint"
-                },
-                {
-                    "name": "accumulated_rewards",
-                    "type": "BigUint"
-                },
-                {
-                    "name": "total_shares",
-                    "type": "BigUint"
-                }
-            ]
-        }
+    "framework": {
+      "name": "multiversx-sc",
+      "version": "0.43.4"
     }
+  },
+  "name": "ControllerContract",
+  "constructor": {
+    "inputs": [
+      {
+        "name": "usdc_token_id",
+        "type": "TokenIdentifier"
+      },
+      {
+        "name": "phase",
+        "type": "Phase"
+      }
+    ],
+    "outputs": []
+  },
+  "endpoints": [
+    {
+      "name": "deposit",
+      "mutability": "mutable",
+      "payableInTokens": ["*"],
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "EsdtTokenPayment"
+        }
+      ]
+    },
+    {
+      "name": "withdraw",
+      "mutability": "mutable",
+      "payableInTokens": ["*"],
+      "inputs": [
+        {
+          "name": "opt_force_withdraw",
+          "type": "optional<bool>",
+          "multi_arg": true
+        }
+      ],
+      "outputs": [
+        {
+          "type": "List<EsdtTokenPayment>"
+        }
+      ]
+    },
+    {
+      "name": "unbond",
+      "mutability": "mutable",
+      "payableInTokens": ["*"],
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "EsdtTokenPayment"
+        }
+      ]
+    },
+    {
+      "name": "claimRewards",
+      "mutability": "mutable",
+      "payableInTokens": ["*"],
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "claimControllerRewards",
+      "mutability": "mutable",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "rebalance",
+      "mutability": "mutable",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "addPlatform",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "setPlatformDistribution",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "setMinUnbondEpochs",
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "min_unbond_epochs",
+          "type": "u64"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "getControllerParameters",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "ControllerParametersDTO"
+        }
+      ]
+    },
+    {
+      "name": "getForceWithdrawFeesPercentage",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "registerSavingsToken",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "payableInTokens": ["EGLD"],
+      "inputs": [
+        {
+          "name": "token_display_name",
+          "type": "bytes"
+        },
+        {
+          "name": "token_ticker",
+          "type": "bytes"
+        },
+        {
+          "name": "num_decimals",
+          "type": "u32"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "registerUnbondToken",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "payableInTokens": ["EGLD"],
+      "inputs": [
+        {
+          "name": "token_display_name",
+          "type": "bytes"
+        },
+        {
+          "name": "token_ticker",
+          "type": "bytes"
+        },
+        {
+          "name": "num_decimals",
+          "type": "u32"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "docs": [
+        "Calculate the rewards for a given position.",
+        "It sums up the rewards and the accumulated rewards based on the proportion of the shares given.",
+        "",
+        "This function has to be called when:",
+        "- you want to know off-chain the rewards of a given position",
+        "- A user claims his rewards",
+        "- We merge multiple positions into one (the sum of the old positions ends up in the accumulated rewards of the new position)"
+      ],
+      "name": "calculateRewardsForGivenPosition",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "savings_token_amount",
+          "type": "BigUint"
+        },
+        {
+          "name": "attributes",
+          "type": "SavingsTokenAttributes"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "BigUint"
+        }
+      ]
+    },
+    {
+      "name": "setRewardsPerSharePerBlock",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "new_rewards_per_share_per_block",
+          "type": "BigUint"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "setProduceRewardsEnabled",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "enabled",
+          "type": "bool"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "isProduceRewardsEnabled",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "getLastUpdateBlockNonce",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "getRewardsPerShare",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "BigUint"
+        }
+      ]
+    },
+    {
+      "docs": [
+        "The amount of rewards per share that are produced in one block.",
+        "Can only be changed manually by the owner.",
+        "This is a variation of the APR."
+      ],
+      "name": "getRewardsPerSharePerBlock",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "BigUint"
+        }
+      ]
+    },
+    {
+      "docs": ["Will maybe be calculated dynamically in the future"],
+      "name": "getPhase",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "Phase"
+        }
+      ]
+    },
+    {
+      "name": "setPhase",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "phase",
+          "type": "Phase"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "setDepositFees",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "phase",
+          "type": "Phase"
+        },
+        {
+          "name": "fees_perc",
+          "type": "u64"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "getDepositFees",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "phase",
+          "type": "Phase"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "setVaultAddress",
+      "onlyOwner": true,
+      "mutability": "mutable",
+      "inputs": [
+        {
+          "name": "vault_addr",
+          "type": "Address"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "getVaultAddress",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "Address"
+        }
+      ]
+    }
+  ],
+  "events": [],
+  "hasCallback": false,
+  "types": {
+    "ControllerParametersDTO": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "phase",
+          "type": "Phase"
+        },
+        {
+          "name": "min_unbond_epochs",
+          "type": "u64"
+        },
+        {
+          "name": "force_withdraw_fees_percentage",
+          "type": "u64"
+        },
+        {
+          "name": "deposit_fees_percentage",
+          "type": "u64"
+        },
+        {
+          "name": "rewards_per_share_per_block",
+          "type": "BigUint"
+        },
+        {
+          "name": "usdc_token_id",
+          "type": "TokenIdentifier"
+        },
+        {
+          "name": "savings_token_id",
+          "type": "TokenIdentifier"
+        },
+        {
+          "name": "unbond_token_id",
+          "type": "TokenIdentifier"
+        }
+      ]
+    },
+    "EsdtTokenPayment": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "token_identifier",
+          "type": "TokenIdentifier"
+        },
+        {
+          "name": "token_nonce",
+          "type": "u64"
+        },
+        {
+          "name": "amount",
+          "type": "BigUint"
+        }
+      ]
+    },
+    "Phase": {
+      "type": "enum",
+      "variants": [
+        {
+          "name": "Accumulation",
+          "discriminant": 0
+        },
+        {
+          "name": "Depletion",
+          "discriminant": 1
+        }
+      ]
+    },
+    "SavingsTokenAttributes": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "initial_rewards_per_share",
+          "type": "BigUint"
+        },
+        {
+          "name": "accumulated_rewards",
+          "type": "BigUint"
+        },
+        {
+          "name": "total_shares",
+          "type": "BigUint"
+        }
+      ]
+    },
+    "UnbondTokenAttributes": {
+      "type": "struct",
+      "fields": [
+        {
+          "name": "unlock_epoch",
+          "type": "u64"
+        }
+      ]
+    }
+  }
 }
