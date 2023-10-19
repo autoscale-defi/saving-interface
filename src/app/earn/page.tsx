@@ -1,15 +1,17 @@
 'use client';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { DepositTab } from '@/app/money/_components/deposit-tab.component';
+import { DepositTab } from '@/app/earn/_components/deposit-tab.component';
 import React from 'react';
 import { WithdrawTab } from './_components/withdraw-tab.component';
 import { Card } from '@/components/ui/card';
-
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+import { UnbondDialog } from '@/app/earn/_components/unbond-dialog-component';
 export default function MyMoney() {
   return (
-    <div className="flex flex-row items-center gap-12">
-      <Card className="bg-form px-2 pt-2">
+    <div className="flex flex-col items-end gap-2">
+      <Card className="bg-form px-4 pt-4">
         <Tabs defaultValue="deposit" className="w-full md:w-[500px]">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="deposit">Deposit</TabsTrigger>
@@ -18,11 +20,13 @@ export default function MyMoney() {
           <TabsContent value="deposit">
             <DepositTab />
           </TabsContent>
-          <TabsContent className="py-2" value="withdraw">
+          <TabsContent value="withdraw">
             <WithdrawTab />
           </TabsContent>
         </Tabs>
       </Card>
+
+      <UnbondDialog />
     </div>
   );
 }

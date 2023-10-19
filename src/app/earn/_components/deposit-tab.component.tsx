@@ -1,13 +1,6 @@
 'use client';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { PercentRange } from '@/components/ui/percent-range';
 import React from 'react';
 import { useDepositTransactions } from '@/lib/dapp-core/hooks/transactions/useDepositTransactions.hooks';
@@ -75,7 +68,7 @@ export function DepositTab() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="space-y-8">
+        <div className="space-y-12">
           <div>
             <TokenForm
               title="Amount"

@@ -1,14 +1,10 @@
 'use client';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { CardContent } from '@/components/ui/card';
 import { PercentRange } from '@/components/ui/percent-range';
 import React from 'react';
-import { useDepositTransactions } from '@/lib/dapp-core/hooks/transactions/useDepositTransactions.hooks';
-import { useGetUSDCBalance } from '@/lib/dapp-core/hooks/accounts/useGetUSDCBalance.hooks';
 import { useAccount, useIsLoggedIn } from '@/lib/dapp-core';
 import { SignDialog } from '@/components/sign-dialog.component';
-import { NumericalInput } from '@/components/numerical-input.component';
 import { DefiWallet } from '@/app/_components/defi-wallet.component';
 import {
   useGetASUSDCBalance,
@@ -17,7 +13,6 @@ import {
 import { useWithdrawTransactions } from '@/lib/dapp-core/hooks/transactions/useWithdrawTransactions.hook';
 import RadioSelect from '@/components/ui/radio-select';
 import { Badge } from '@/components/ui/badge';
-import { formatUSDAmount } from '@/lib/amount';
 import { TokenForm } from '@/components/ui/token-input';
 
 export function WithdrawTab() {
@@ -75,8 +70,8 @@ export function WithdrawTab() {
         setOpen={() => setSessionId(null)}
       />
 
-      <CardContent>
-        <div className="space-y-8">
+      <CardContent className="my-8">
+        <div className="space-y-12">
           <div className="flex flex-col">
             <TokenForm
               title="Amount"

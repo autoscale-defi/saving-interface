@@ -34,7 +34,7 @@ export const useGetASUUSDCToken = (): any[] | undefined => {
   const account = useAccount();
 
   const { data, isLoading } = useQuery(
-    ['asuudc-balance', account?.address],
+    ['asuudc-token', account?.address],
     () => getASUUSDCBalance(account?.address || ''),
     { enabled: Boolean(account?.address) }
   );
@@ -56,6 +56,5 @@ export const useGetASUUSDCToken = (): any[] | undefined => {
       }
     });
   }
-  console.log('data', data);
   return data ? data : [];
 };
