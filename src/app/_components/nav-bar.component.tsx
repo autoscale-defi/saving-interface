@@ -31,17 +31,16 @@ export function NavBar({
 
         <div className="flex items-center justify-center space-x-2 md:space-x-4">
           <Link
-            href="/"
-            className="text-sm font-medium transition-colors hover:text-primary"
-          >
-            Analytics
-          </Link>
-
-          <Link
             href="/earn"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
             Earn
+          </Link>
+          <Link
+            href="/analytics"
+            className="text-sm font-medium transition-colors hover:text-primary"
+          >
+            Analytics
           </Link>
         </div>
       </div>
