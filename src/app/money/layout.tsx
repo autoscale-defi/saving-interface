@@ -9,6 +9,7 @@ import { useClaimAmount } from '@/lib/dapp-core/hooks/transactions/useClaimTrans
 import { ClaimCard } from '@/app/_components/claim-card.component';
 import { useGetASUSDCBalance } from '@/lib/dapp-core/hooks/accounts/useGetASUSDCBalance.hooks';
 import React from 'react';
+import { UnboundCard } from '../_components/unbound-card.componen';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const USDCBalance = useGetUSDCBalance();
@@ -56,6 +57,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </div>
             </CardContent>
           </Card>
+        </div>
+        <div className="flex flex-col gap-4">
+          <UnboundCard />
         </div>
       </div>
     </div>
