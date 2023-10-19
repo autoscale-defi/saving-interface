@@ -39,7 +39,6 @@ export function UnbondCard() {
     if (epochToWait < 0) {
       return new Date().getTime();
     }
-    return new Date().getTime();
 
     return new Date().getTime() + epochToWait * 2 * 60 * 60 * 1000;
   }

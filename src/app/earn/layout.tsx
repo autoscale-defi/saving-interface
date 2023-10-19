@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8">
         <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
           <h2 className="text-3xl font-bold tracking-tight">Earn</h2>
 

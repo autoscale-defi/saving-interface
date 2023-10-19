@@ -53,16 +53,14 @@ export function ClaimCard() {
           </CardContent>
         </div>
 
-        {Boolean(USDCRewards) && (
-          <Button
-            size="sm"
-            disabled={Boolean(sessionId)}
-            onClick={handleClaim}
-            className="mr-4"
-          >
-            Claim
-          </Button>
-        )}
+        <Button
+          size="sm"
+          disabled={Boolean(sessionId) || (USDCRewards || 0) < 0.01}
+          onClick={handleClaim}
+          className="mr-4"
+        >
+          Claim
+        </Button>
       </Card>
     </>
   );
