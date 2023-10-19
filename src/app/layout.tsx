@@ -28,9 +28,7 @@ export default function RootLayout({
           <div className="container max-w-[1184px] space-y-8 p-4 md:p-6">
             <NavBar />
 
-            <main role="main" className="py-3">
-              {children}
-            </main>
+            <main role="main">{children}</main>
           </div>
 
           <Footer />

@@ -37,7 +37,7 @@ export function RevenueCompareChart() {
       <CardHeader>
         <CardTitle>Compare with market</CardTitle>
         <CardDescription>
-          Compare our APY with the market average
+          Compare our APR with the market average
         </CardDescription>
       </CardHeader>
       <CardContent className="pb-4">

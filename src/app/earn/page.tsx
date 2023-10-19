@@ -11,7 +11,7 @@ import { UnbondDialog } from '@/app/earn/_components/unbond-dialog-component';
 export default function MyMoney() {
   return (
     <div className="flex flex-col items-end gap-2">
-      <Card className="bg-form px-4 pt-4">
+      <Card className="w-full bg-form px-4 pt-4">
         <Tabs defaultValue="deposit" className="w-full md:w-[500px]">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="deposit">Deposit</TabsTrigger>

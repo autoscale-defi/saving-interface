@@ -69,13 +69,9 @@ export function DepositTab() {
         open={Boolean(sessionId)}
         setOpen={() => setSessionId(null)}
       />
-      <CardHeader>
-        <CardDescription>
-          Deposit your USDC and earn <span className="font-bold">6% APY</span>
-        </CardDescription>
-      </CardHeader>
+
       <CardContent>
-        <div className="space-y-8">
+        <div className="my-6 space-y-8">
           <div>
             <TokenForm
               title="Amount"

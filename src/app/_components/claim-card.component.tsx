@@ -38,31 +38,24 @@ export function ClaimCard() {
         open={Boolean(sessionId)}
         setOpen={() => setSessionId(null)}
       />
-      <Card className={'flew-row flex items-center justify-between'}>
-        <div>
-          <CardHeader className="pb-1">
-            <CardTitle className="text-xs font-medium">
-              My USDC rewards
-            </CardTitle>
-          </CardHeader>
+      <Card className={'flex flex-col'}>
+        <CardHeader className="pb-1">
+          <CardTitle className="text-xs font-medium">My USDC rewards</CardTitle>
+        </CardHeader>
 
-          <CardContent className="space-y-2">
-            <div className="text-md font-bold">
-              {!isLoading ? formatUSDAmount(USDCRewards) : <Placeholder />}
-            </div>
-          </CardContent>
-        </div>
-
-        {Boolean(USDCRewards) && (
+        <CardContent className="space-y-4">
+          <div className="text-md font-bold">
+            {!isLoading ? formatUSDAmount(USDCRewards) : <Placeholder />}
+          </div>
           <Button
             size="sm"
-            disabled={Boolean(sessionId)}
+            disabled={Boolean(sessionId) || (USDCRewards || 0) < 0.01}
             onClick={handleClaim}
-            className="mr-4"
+            className="w-full"
           >
             Claim
           </Button>
-        )}
+        </CardContent>
       </Card>
     </>
   );
