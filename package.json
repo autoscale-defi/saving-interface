@@ -35,6 +35,7 @@
     "next-themes": "^0.2.1",
     "qs": "^6.11.1",
     "react": "^18.2.0",
+    "react-countdown": "^2.3.5",
     "react-dom": "latest",
     "react-range": "^1.8.14",
     "react-social-icons": "^6.4.0",

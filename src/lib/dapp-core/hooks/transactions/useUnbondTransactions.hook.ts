@@ -8,15 +8,11 @@ import {
 import { getControllerAbi } from '@/lib/dapp-core/abi/controller.abi';
 import { useAccount, useSendTransactions } from '@/lib/dapp-core';
 import { boolean } from 'zod';
+import BigNumber from 'bignumber.js';
 
 const GAS_LIMIT = 500000000;
 
-function getUnboundTransactions(
-  amount: number,
-  address?: string,
-  asusdc?: any,
-  forceUnboundEarly?: boolean
-) {
+function getUnbondTransactions(address?: string, asuusdc?: any) {
   if (!address) {
     throw new Error('address is required');
   }
@@ -25,15 +21,15 @@ function getUnboundTransactions(
     address: new Address(process.env.NEXT_PUBLIC_CONTROLLER_ADDRESS),
     abi: getControllerAbi(),
   });
-
+  console.log(asuusdc);
   return contract.methods
-    .unbound([forceUnboundEarly])
+    .unbond()
     .withSingleESDTNFTTransfer(
       TokenTransfer.metaEsdtFromAmount(
-        asusdc.collection,
-        asusdc.nonce,
-        amount,
-        asusdc.decimals
+        asuusdc.collection,
+        asuusdc.nonce,
+        BigNumber(asuusdc.balance / 10 ** asuusdc.decimals),
+        asuusdc.decimals
       )
     )
     .withGasLimit(GAS_LIMIT)
@@ -42,17 +38,12 @@ function getUnboundTransactions(
     .buildTransaction();
 }
 
-export function useUnboundTransactions({ address }: { address?: string }) {
+export function useUnbondTransactions({ address }: { address?: string }) {
   const { sendTransaction } = useSendTransactions();
 
-  return (amount: number, asusdc: any, forceUnboundEarly: boolean) =>
+  return (asuusdc: any) =>
     sendTransaction({
-      transaction: getUnboundTransactions(
-        amount,
-        address,
-        asusdc,
-        forceUnboundEarly
-      ),
+      transaction: getUnbondTransactions(address, asuusdc),
       sessionInformations: { action: 'unbound' },
     });
 }

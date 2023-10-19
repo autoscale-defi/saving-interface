@@ -19,7 +19,6 @@ function getDepositTransactions(
   if (!address) {
     throw new Error('address is required');
   }
-  console.log('asusdc', asusdc);
   const contract = new SmartContract({
     address: new Address(process.env.NEXT_PUBLIC_CONTROLLER_ADDRESS),
     abi: getControllerAbi(),

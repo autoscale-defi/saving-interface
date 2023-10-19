@@ -38,10 +38,10 @@ export function NavBar({
           </Link>
 
           <Link
-            href="/money"
+            href="/earn"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            Money
+            Earn
           </Link>
         </div>
       </div>

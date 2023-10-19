@@ -5,11 +5,5 @@ import { getCurrentBlock } from '../../services/blockchain.services';
 export const useGetCurrentBlock = () => {
   const account = useAccount();
 
-  const { data, isLoading } = useQuery(['current-block'], () =>
-    getCurrentBlock()
-  );
-
-  if (isLoading) return undefined;
-
-  return data;
+  return useQuery(['current-block'], () => getCurrentBlock());
 };
