@@ -16,51 +16,38 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const AUSDCBalance = useGetASUSDCBalance();
 
   return (
-    <div className="flex flex-col gap-4">
-      <h2 className="text-3xl font-bold tracking-tight">Money</h2>
+    <div className="flex flex-col items-center justify-center gap-4">
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
+          <h2 className="text-3xl font-bold tracking-tight">Money</h2>
 
-      <div className="flex flex-col justify-end gap-12 md:flex-row-reverse">
-        <div className="flex flex-col gap-4">
-          <ClaimCard />
+          <div className="flex flex-row space-x-4">
+            <Card>
+              <CardHeader className="pb-1">
+                <CardTitle className="text-xs font-medium">
+                  My USDC deposit
+                </CardTitle>
+              </CardHeader>
 
-          <Card>
-            <CardHeader className="pb-1">
-              <CardTitle className="text-xs font-medium">My USDC</CardTitle>
-            </CardHeader>
+              <CardContent>
+                <div className="text-md font-bold">
+                  {!isNil(USDCBalance) ? (
+                    formatUSDAmount(AUSDCBalance)
+                  ) : (
+                    <Placeholder />
+                  )}
+                </div>
+              </CardContent>
+            </Card>
 
-            <CardContent>
-              <div className="text-md font-bold">
-                {!isNil(USDCBalance) ? (
-                  formatUSDAmount(USDCBalance)
-                ) : (
-                  <Placeholder />
-                )}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="pb-1">
-              <CardTitle className="text-xs font-medium">
-                My USDC deposit
-              </CardTitle>
-            </CardHeader>
-
-            <CardContent>
-              <div className="text-md font-bold">
-                {!isNil(USDCBalance) ? (
-                  formatUSDAmount(AUSDCBalance)
-                ) : (
-                  <Placeholder />
-                )}
-              </div>
-            </CardContent>
-          </Card>
-
-          <UnboundCard />
+            <ClaimCard />
+          </div>
         </div>
 
-        <div>{children}</div>
+        <div className="flex flex-col justify-between md:flex-row">
+          <div>{children}</div>
+          {/**<UnboundCard />**/}
+        </div>
       </div>
     </div>
   );

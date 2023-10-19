@@ -17,8 +17,9 @@ module.exports = {
     },
     extend: {
       colors: {
+        form: 'var(--form)',
         border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
+        input: rgba('--input'),
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         'background-lighter': 'hsl(var(--background-lighter))',
@@ -51,6 +52,7 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        'input-button': rgba('--input-button'),
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -75,3 +77,7 @@ module.exports = {
   },
   plugins: [require('tailwindcss-animate')],
 };
+
+function rgba(variable: string) {
+  return `rgb(var(${variable}))`;
+}

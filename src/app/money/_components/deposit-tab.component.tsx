@@ -14,13 +14,9 @@ import { useDepositTransactions } from '@/lib/dapp-core/hooks/transactions/useDe
 import { useGetUSDCBalance } from '@/lib/dapp-core/hooks/accounts/useGetUSDCBalance.hooks';
 import { useAccount, useIsLoggedIn } from '@/lib/dapp-core';
 import { SignDialog } from '@/components/sign-dialog.component';
-import { NumericalInput } from '@/components/numerical-input.component';
 import { DefiWallet } from '@/app/_components/defi-wallet.component';
-import {
-  useGetASUSDCBalance,
-  useGetASUSDCToken,
-} from '@/lib/dapp-core/hooks/accounts/useGetASUSDCBalance.hooks';
-import { formatUSDAmount } from '@/lib/amount';
+import { useGetASUSDCToken } from '@/lib/dapp-core/hooks/accounts/useGetASUSDCBalance.hooks';
+import { TokenForm } from '@/components/ui/token-input';
 
 export function DepositTab() {
   const usdcBalance = useGetUSDCBalance();
@@ -73,48 +69,35 @@ export function DepositTab() {
         open={Boolean(sessionId)}
         setOpen={() => setSessionId(null)}
       />
-      <Card>
-        <CardHeader>
-          <CardTitle>Deposit</CardTitle>
-          <CardDescription>
-            Deposit your USDC and earn <span className="font-bold">6% APY</span>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-8">
-            <div className="space-y-1">
-              <p className="mx-1 text-xs text-muted-foreground">
-                Balance: {formatUSDAmount(usdcBalance)}
-              </p>
-              <div className="flex w-full max-w-sm items-center space-x-2">
-                <NumericalInput
-                  placeholder="Amount"
-                  value={amount}
-                  onUserInput={(value) => setAmount(value)}
-                />
-                <Button
-                  variant="outline"
-                  className="text-xs"
-                  onClick={() => setAmount(usdcBalance?.toString() || '0')}
-                >
-                  Max
-                </Button>
-              </div>
+      <CardHeader>
+        <CardDescription>
+          Deposit your USDC and earn <span className="font-bold">6% APY</span>
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-8">
+          <div>
+            <TokenForm
+              title="Amount"
+              balance={usdcBalance || 0}
+              amount={amount}
+              onUpdateAmount={(value) => setAmount(value || '0')}
+            />
 
-              <div className="max-w-[350px] px-2">
-                <PercentRange percent={currentPercent} onChange={setPercent} />
-              </div>
+            <div className="px-2">
+              <PercentRange percent={currentPercent} onChange={setPercent} />
             </div>
-            {isLoggedIn ? (
-              <Button className="w-full" onClick={handleDeposit}>
-                Deposit USDC
-              </Button>
-            ) : (
-              <DefiWallet buttonClassName="w-full" onLogin={handleDeposit} />
-            )}
           </div>
-        </CardContent>
-      </Card>
+
+          {isLoggedIn ? (
+            <Button className="w-full" onClick={handleDeposit}>
+              Deposit USDC
+            </Button>
+          ) : (
+            <DefiWallet buttonClassName="w-full" onLogin={handleDeposit} />
+          )}
+        </div>
+      </CardContent>
     </>
   );
 }

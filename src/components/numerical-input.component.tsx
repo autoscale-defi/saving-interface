@@ -26,7 +26,6 @@ export const NumericalInput = React.memo(function InnerInput({
 
   return (
     <Input
-      {...rest}
       value={value}
       onChange={(event) => {
         enforcer(event.target.value.replace(/,/g, '.'));
@@ -45,6 +44,7 @@ export const NumericalInput = React.memo(function InnerInput({
       minLength={1}
       maxLength={79}
       spellCheck="false"
+      {...rest}
     />
   );
 });

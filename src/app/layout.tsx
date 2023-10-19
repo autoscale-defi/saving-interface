@@ -1,12 +1,12 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import { AppProviders } from '@/providers/app.provider';
 import { NavBar } from '@/app/_components/nav-bar.component';
 import { TransactionToastList } from '@/components/TransactionsToast/TransactionToastList';
 import { Footer } from '@/app/_components/footer.component';
 
-const inter = Inter({ subsets: ['latin'] });
+const Jarkarta = Plus_Jakarta_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Savings by Autoscale',
@@ -21,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className={`flex h-[100vh] flex-col items-center`}>
+      <body
+        className={`flex h-[100vh] flex-col items-center ${Jarkarta.className}`}
+      >
         <AppProviders>
-          <div className="container max-w-[1184px] p-4 md:p-6">
+          <div className="container max-w-[1184px] space-y-8 p-4 md:p-6">
             <NavBar />
 
             <main role="main" className="py-3">

@@ -17,10 +17,13 @@ import {
 import { useWithdrawTransactions } from '@/lib/dapp-core/hooks/transactions/useWithdrawTransactions.hook';
 import RadioSelect from '@/components/ui/radio-select';
 import { Badge } from '@/components/ui/badge';
+import { formatUSDAmount } from '@/lib/amount';
+import { TokenForm } from '@/components/ui/token-input';
 
 export function WithdrawTab() {
   const balance = useGetASUSDCBalance();
   const asusdcToken = useGetASUSDCToken();
+  const asusdcBalance = useGetASUSDCBalance();
   const account = useAccount();
   const [sessionId, setSessionId] = React.useState<string | null>(null);
   const isLoggedIn = useIsLoggedIn();
@@ -71,71 +74,59 @@ export function WithdrawTab() {
         open={Boolean(sessionId)}
         setOpen={() => setSessionId(null)}
       />
-      <Card>
-        <CardHeader className="pb-4">
-          <CardTitle>Withdraw</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-8">
-            <div className="">
-              <div className="flex w-full max-w-sm items-center space-x-2">
-                <NumericalInput
-                  placeholder="Amount"
-                  value={amount}
-                  onUserInput={(value) => setAmount(value)}
-                />
-                <Button
-                  variant="outline"
-                  className="text-xs"
-                  onClick={() => setAmount(balance?.toString() || '0')}
-                >
-                  Max
-                </Button>
-              </div>
 
-              <div className="max-w-[350px] px-2">
-                <PercentRange percent={currentPercent} onChange={setPercent} />
-              </div>
+      <CardContent>
+        <div className="space-y-8">
+          <div className="flex flex-col">
+            <TokenForm
+              title="Amount"
+              balance={asusdcBalance || 0}
+              amount={amount}
+              onUpdateAmount={(value) => setAmount(value || '0')}
+            />
+
+            <div className="w-full px-2">
+              <PercentRange percent={currentPercent} onChange={setPercent} />
             </div>
-            <RadioSelect>
-              <RadioSelect.Item
-                isSelected={!forceUnboundEarly}
-                onSelect={() => setForceUnbondEarly(false)}
-                title={
-                  <div className={'flex flex-row items-center space-x-2'}>
-                    <Badge variant="blue">
-                      <span className="font-semibold">Recommended</span>
-                    </Badge>
-                    <span>I get my tokens in 7 days </span>
-                  </div>
-                }
-                description="Get back your tokens in 7 days without any fees. Note that an action is required, they will not arrive automatically."
-              />
-              <RadioSelect.Item
-                isSelected={forceUnboundEarly}
-                onSelect={() => setForceUnbondEarly(true)}
-                title=" I need my tokens immediately"
-                description={
-                  <span>
-                    Receive your tokens immediately, but please note that there
-                    will be a{' '}
-                    <span className="font-bold text-primary">7.5% fee</span>{' '}
-                    deducted from the amount.
-                  </span>
-                }
-              />
-            </RadioSelect>
-
-            {isLoggedIn ? (
-              <Button className="w-full" onClick={handleWithdraw}>
-                Withdraw USDC
-              </Button>
-            ) : (
-              <DefiWallet buttonClassName="w-full" onLogin={handleWithdraw} />
-            )}
           </div>
-        </CardContent>
-      </Card>
+          <RadioSelect>
+            <RadioSelect.Item
+              isSelected={!forceUnboundEarly}
+              onSelect={() => setForceUnbondEarly(false)}
+              title={
+                <div className={'flex flex-row items-center space-x-2'}>
+                  <Badge variant="blue">
+                    <span className="font-semibold">Recommended</span>
+                  </Badge>
+                  <span>I get my tokens in 10 days </span>
+                </div>
+              }
+              description="Get back your tokens in 10 days without any fees. Note that an action is required, they will not arrive automatically."
+            />
+            <RadioSelect.Item
+              isSelected={forceUnboundEarly}
+              onSelect={() => setForceUnbondEarly(true)}
+              title=" I need my tokens immediately"
+              description={
+                <span>
+                  Receive your tokens immediately, but please note that there
+                  will be a{' '}
+                  <span className="font-bold text-primary">7.5% fee</span>{' '}
+                  deducted from the amount.
+                </span>
+              }
+            />
+          </RadioSelect>
+
+          {isLoggedIn ? (
+            <Button className="w-full" onClick={handleWithdraw}>
+              Withdraw USDC
+            </Button>
+          ) : (
+            <DefiWallet buttonClassName="w-full" onLogin={handleWithdraw} />
+          )}
+        </div>
+      </CardContent>
     </>
   );
 }
