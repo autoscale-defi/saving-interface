@@ -21,16 +21,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className={inter.className}>
+      <body className={`flex h-[100vh] flex-col items-center`}>
         <AppProviders>
-          <div className="flex h-[100vh] w-full flex-col items-center justify-center">
-            <div className="h-full w-full px-4 py-3 lg:mx-12 lg:max-w-6xl">
-              <NavBar />
+          <div className="container max-w-[1184px] p-4 md:p-6">
+            <NavBar />
 
-              <div className="space-y-8 py-12">{children}</div>
-            </div>
-            <Footer />
+            <main role="main" className="py-3">
+              {children}
+            </main>
           </div>
+
+          <Footer />
           <TransactionToastList />
         </AppProviders>
       </body>

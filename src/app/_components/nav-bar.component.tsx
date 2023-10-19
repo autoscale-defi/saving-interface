@@ -23,7 +23,7 @@ export function NavBar({
       className={cn('flex items-center justify-between', className)}
       {...props}
     >
-      <div className="flex items-center justify-center space-x-6 md:space-x-8">
+      <div className="flex items-center justify-center space-x-4 md:space-x-8">
         <div className="flex flex-row items-center justify-center space-x-2 font-medium">
           <Image src="/ats.svg" alt="ATS logo" width={30} height={30} />
           <span>Savings</span>
@@ -53,7 +53,9 @@ export function NavBar({
           <DefiWallet />
         )}
 
-        <ThemeToggle />
+        <div className="hidden md:block">
+          <ThemeToggle />
+        </div>
       </div>
     </nav>
   );

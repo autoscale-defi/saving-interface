@@ -19,8 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex flex-col gap-4">
       <h2 className="text-3xl font-bold tracking-tight">Money</h2>
 
-      <div className="flex flex-row gap-12">
-        <div>{children}</div>
+      <div className="flex flex-col justify-end gap-12 md:flex-row-reverse">
         <div className="flex flex-col gap-4">
           <ClaimCard />
 
@@ -57,10 +56,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </div>
             </CardContent>
           </Card>
-        </div>
-        <div className="flex flex-col gap-4">
+
           <UnboundCard />
         </div>
+
+        <div>{children}</div>
       </div>
     </div>
   );

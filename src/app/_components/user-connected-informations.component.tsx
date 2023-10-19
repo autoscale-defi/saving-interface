@@ -32,9 +32,11 @@ export function UserConnectedInformations(props: Props) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" className={'space-x-4 '}>
+        <Button variant="outline" className={'space-x-1 md:space-x-4'}>
           <User className={'h-5 w-5'} />
-          <span className="text-sm">{formatAddress(address, 5)}</span>
+          <span className="text-xs md:text-sm">
+            {formatAddress(address, 5)}
+          </span>
         </Button>
       </SheetTrigger>
 
