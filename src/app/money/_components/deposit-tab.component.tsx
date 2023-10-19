@@ -48,6 +48,7 @@ export function DepositTab() {
       },
       onSign() {
         setSessionId(null);
+        setAmount('0');
       },
     });
   }, [amount, sendDepositTransactions]);

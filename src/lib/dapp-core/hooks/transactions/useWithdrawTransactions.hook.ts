@@ -7,13 +7,15 @@ import {
 } from '@multiversx/sdk-core/out';
 import { getControllerAbi } from '@/lib/dapp-core/abi/controller.abi';
 import { useAccount, useSendTransactions } from '@/lib/dapp-core';
+import { boolean } from 'zod';
 
 const GAS_LIMIT = 500000000;
 
 function getWithdrawTransactions(
   amount: number,
   address?: string,
-  asusdc?: any
+  asusdc?: any,
+  forceUnboundEarly?: boolean
 ) {
   if (!address) {
     throw new Error('address is required');
@@ -25,7 +27,7 @@ function getWithdrawTransactions(
   });
 
   return contract.methods
-    .withdraw()
+    .withdraw([forceUnboundEarly])
     .withSingleESDTNFTTransfer(
       TokenTransfer.metaEsdtFromAmount(
         asusdc.collection,
@@ -43,9 +45,14 @@ function getWithdrawTransactions(
 export function useWithdrawTransactions({ address }: { address?: string }) {
   const { sendTransaction } = useSendTransactions();
 
-  return (amount: number, asusdc: any) =>
+  return (amount: number, asusdc: any, forceUnboundEarly: boolean) =>
     sendTransaction({
-      transaction: getWithdrawTransactions(amount, address, asusdc),
+      transaction: getWithdrawTransactions(
+        amount,
+        address,
+        asusdc,
+        forceUnboundEarly
+      ),
       sessionInformations: { action: 'withdraw' },
     });
 }

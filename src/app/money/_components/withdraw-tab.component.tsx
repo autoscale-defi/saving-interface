@@ -15,6 +15,8 @@ import {
   useGetASUSDCToken,
 } from '@/lib/dapp-core/hooks/accounts/useGetASUSDCBalance.hooks';
 import { useWithdrawTransactions } from '@/lib/dapp-core/hooks/transactions/useWithdrawTransactions.hook';
+import RadioSelect from '@/components/ui/radio-select';
+import { Badge } from '@/components/ui/badge';
 
 export function WithdrawTab() {
   const balance = useGetASUSDCBalance();
@@ -22,6 +24,7 @@ export function WithdrawTab() {
   const account = useAccount();
   const [sessionId, setSessionId] = React.useState<string | null>(null);
   const isLoggedIn = useIsLoggedIn();
+  const [forceUnboundEarly, setForceUnbondEarly] = React.useState(false);
 
   const sendWithdrawTransactions = useWithdrawTransactions({
     address: account?.address,
@@ -31,7 +34,8 @@ export function WithdrawTab() {
   const handleWithdraw = React.useCallback(() => {
     const { signTransaction, sessionId } = sendWithdrawTransactions(
       Number(amount),
-      asusdcToken
+      asusdcToken,
+      forceUnboundEarly
     );
 
     setSessionId(sessionId);
@@ -42,6 +46,7 @@ export function WithdrawTab() {
       },
       onSign() {
         setSessionId(null);
+        setAmount('0');
       },
     });
   }, [amount, sendWithdrawTransactions]);
@@ -92,6 +97,34 @@ export function WithdrawTab() {
                 <PercentRange percent={currentPercent} onChange={setPercent} />
               </div>
             </div>
+            <RadioSelect>
+              <RadioSelect.Item
+                isSelected={!forceUnboundEarly}
+                onSelect={() => setForceUnbondEarly(false)}
+                title={
+                  <div className={'flex flex-row items-center space-x-2'}>
+                    <Badge variant="blue">
+                      <span className="font-semibold">Recommended</span>
+                    </Badge>
+                    <span>I get my tokens in 7 days </span>
+                  </div>
+                }
+                description="Get back your tokens in 7 days without any fees. Note that an action is required, they will not arrive automatically."
+              />
+              <RadioSelect.Item
+                isSelected={forceUnboundEarly}
+                onSelect={() => setForceUnbondEarly(true)}
+                title=" I need my tokens immediately"
+                description={
+                  <span>
+                    Receive your tokens immediately, but please note that there
+                    will be a{' '}
+                    <span className="font-bold text-primary">7.5% fee</span>{' '}
+                    deducted from the amount.
+                  </span>
+                }
+              />
+            </RadioSelect>
 
             {isLoggedIn ? (
               <Button className="w-full" onClick={handleWithdraw}>
