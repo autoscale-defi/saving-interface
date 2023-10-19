@@ -10,6 +10,13 @@ import { SignDialog } from '@/components/sign-dialog.component';
 import { DefiWallet } from '@/app/_components/defi-wallet.component';
 import { useGetASUSDCToken } from '@/lib/dapp-core/hooks/accounts/useGetASUSDCBalance.hooks';
 import { TokenForm } from '@/components/ui/token-input';
+import { Badge } from '@/components/ui/badge';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 export function DepositTab() {
   const usdcBalance = useGetUSDCBalance();
@@ -68,7 +75,7 @@ export function DepositTab() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="space-y-12">
+        <div className="space-y-8">
           <div>
             <TokenForm
               title="Amount"
@@ -79,6 +86,32 @@ export function DepositTab() {
 
             <div className="px-2">
               <PercentRange percent={currentPercent} onChange={setPercent} />
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <h2>Fees</h2>
+            <div className="flex flex-1 flex-col space-y-4 rounded-lg bg-card px-6 py-4">
+              <div className="flex flex-row items-center justify-between">
+                <span className="text-sm font-medium text-muted-foreground">
+                  Deposit fees
+                </span>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger className="cursor-default">
+                      <Badge
+                        variant="green"
+                        className="text-md space-x-2 font-bold"
+                      >
+                        <span>0%</span>
+                      </Badge>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Deposit fees may vary based on market conditions</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
             </div>
           </div>
 

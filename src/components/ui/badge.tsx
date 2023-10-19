@@ -1,7 +1,8 @@
 import { cva } from 'class-variance-authority';
 
 interface Props {
-  variant?: 'blue' | 'orange';
+  variant?: 'blue' | 'orange' | 'green';
+  className?: string;
 }
 
 // eslint-disable-next-line tailwindcss/no-contradicting-classname
@@ -11,6 +12,7 @@ const getBadgeClasses = cva(
     variants: {
       variant: {
         blue: 'bg-[#26EAF6] text-[#283455]',
+        green: 'bg-green-400 text-[#283455]',
         orange: 'bg-[#FF9900] text-[#283455]',
       },
     },
@@ -25,9 +27,9 @@ export const Badge = (props: React.PropsWithChildren<Props>) => {
 
   return (
     <div
-      className={getBadgeClasses({
+      className={`${getBadgeClasses({
         variant,
-      })}
+      })} ${props.className}`}
     >
       {children}
     </div>
