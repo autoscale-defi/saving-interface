@@ -28,9 +28,10 @@
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
+    --background: 219 100.0% 6.7%;
+    --background-lighter: 213 88.5% 10.2%;
     --foreground: 0 0% 95%;
-    --card: 24 9.8% 10%;
+    --card: 208 74.6% 12.4%;
     --card-foreground: 0 0% 95%;
     --popover: 0 0% 9%;
     --popover-foreground: 0 0% 95%;
@@ -55,6 +56,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gradient-to-r from-background-lighter to-background text-foreground;
   }
 }

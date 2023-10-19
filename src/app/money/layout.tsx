@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const AUSDCBalance = useGetASUSDCBalance();
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-4">
       <h2 className="text-3xl font-bold tracking-tight">Money</h2>
 
       <div className="flex flex-row gap-12">

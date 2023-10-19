@@ -9,6 +9,7 @@ import { UserConnectedInformations } from '@/app/_components/user-connected-info
 import { usePathname } from 'next/navigation';
 import { DollarSign } from 'lucide-react';
 import { DefiWallet } from '@/app/_components/defi-wallet.component';
+import Image from 'next/image';
 
 export function NavBar({
   className,
@@ -19,31 +20,30 @@ export function NavBar({
 
   return (
     <nav
-      className={cn('flex w-full items-center justify-between', className)}
+      className={cn('flex items-center justify-between', className)}
       {...props}
     >
-      <div className="flex items-center justify-center space-x-2 md:space-x-4">
-        <div className="rounded-xl bg-primary/30 p-1">
-          <DollarSign className="h-5 w-5"></DollarSign>
+      <div className="flex items-center justify-center space-x-6 md:space-x-8">
+        <div className="flex flex-row items-center justify-center space-x-2 font-medium">
+          <Image src="/ats.svg" alt="ATS logo" width={30} height={30} />
+          <span>Savings</span>
         </div>
 
-        <Link
-          href="/"
-          className={`text-md hover:font-medium ${
-            path === '/' && 'font-medium'
-          }`}
-        >
-          Analytics
-        </Link>
+        <div className="flex items-center justify-center space-x-2 md:space-x-4">
+          <Link
+            href="/"
+            className="text-sm font-medium transition-colors hover:text-primary"
+          >
+            Analytics
+          </Link>
 
-        <Link
-          href="/money"
-          className={`text-md hover:font-medium ${
-            path === '/money' && 'font-medium'
-          }`}
-        >
-          Money
-        </Link>
+          <Link
+            href="/money"
+            className="text-sm font-medium transition-colors hover:text-primary"
+          >
+            Money
+          </Link>
+        </div>
       </div>
 
       <div className="flex items-center space-x-2">
