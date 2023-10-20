@@ -18,7 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="flex flex-col-reverse gap-4 md:flex-row">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-4">
-            <div className="flex w-full flex-row justify-between rounded-sm border-2 border-card py-4 pl-8 pr-4">
+            <div className="flex w-full flex-row justify-between rounded-sm border py-4 pl-8 pr-4 dark:border-card">
               <div className="flex flex-row space-x-6">
                 <div className="text-md flex flex-col border-r pr-6 font-bold">
                   <span className="text-sm text-muted-foreground">

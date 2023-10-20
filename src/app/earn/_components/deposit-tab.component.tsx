@@ -87,7 +87,7 @@ export function DepositTab() {
 
           <div className="space-y-3">
             <h2>Fees</h2>
-            <div className="flex flex-1 flex-col space-y-4 rounded-lg bg-card px-6 py-4">
+            <div className="flex flex-1 flex-col space-y-4 rounded-lg border bg-card px-6 py-4 dark:border-0">
               <div className="flex flex-row items-center justify-between">
                 <span className="text-sm font-medium text-muted-foreground">
                   Deposit fees
