@@ -7,38 +7,39 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { formatCompactUSDAmount } from '@/lib/amount';
 
 const data = [
   {
-    market: 4,
-    apy: 6,
+    date: 'June 2023',
+    TVL: 9345.34,
   },
   {
-    market: 6,
-    apy: 6,
+    date: 'July 2023',
+    TVL: 12343.332,
   },
   {
-    market: 8,
-    apy: 6,
+    date: 'August 2023',
+    TVL: 13232.67,
   },
   {
-    market: 2,
-    apy: 6,
+    date: 'September 2023',
+    TVL: 17039.21,
   },
   {
-    market: 4,
-    apy: 6,
+    date: 'October 2023',
+    TVL: 20034.34,
   },
 ];
 
-export function RevenueCompareChart() {
+export function DepositChart() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Compare with market</CardTitle>
-        <CardDescription>
-          Compare our APR with the market average
-        </CardDescription>
+        <CardTitle className="text-sm font-medium">
+          Total Value Locked
+        </CardTitle>
+        <div className="text-2xl font-bold">$20,034.34</div>
       </CardHeader>
       <CardContent className="pb-4">
         <div className="h-[200px]">
@@ -60,18 +61,18 @@ export function RevenueCompareChart() {
                         <div className="grid grid-cols-2 gap-2">
                           <div className="flex flex-col">
                             <span className="text-[0.70rem] uppercase text-muted-foreground">
-                              Market
+                              Date
                             </span>
                             <span className="font-bold text-muted-foreground">
-                              {payload[0].value}%
+                              {payload[0].payload.date}
                             </span>
                           </div>
                           <div className="flex flex-col">
                             <span className="text-[0.70rem] uppercase text-muted-foreground">
-                              Our APY
+                              Deposit
                             </span>
                             <span className="font-bold">
-                              {payload[1].value}%
+                              {formatCompactUSDAmount(payload[0].payload.TVL)}
                             </span>
                           </div>
                         </div>
@@ -82,24 +83,10 @@ export function RevenueCompareChart() {
                   return null;
                 }}
               />
+
               <Line
                 type="monotone"
-                strokeWidth={2}
-                dataKey="market"
-                activeDot={{
-                  r: 6,
-                  style: { fill: `hsl(var(--primary))`, opacity: 0.25 },
-                }}
-                style={
-                  {
-                    stroke: `hsl(var(--primary))`,
-                    opacity: 0.25,
-                  } as React.CSSProperties
-                }
-              />
-              <Line
-                type="monotone"
-                dataKey="apy"
+                dataKey="TVL"
                 strokeWidth={2}
                 activeDot={{
                   r: 8,
